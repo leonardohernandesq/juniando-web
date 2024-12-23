@@ -14,7 +14,7 @@ export default {
 
         light: "#FFF",
         principal: "#0565FF",
-
+        highlight: "#FBC139",
         "dark-100": "#202020",
       },
       dropShadow: {
