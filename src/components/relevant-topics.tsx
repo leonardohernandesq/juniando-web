@@ -40,7 +40,9 @@ const RelevantTopics = ({ items = MOCKED_EXAMPLE_DATA }: IRelevantTopics) => {
     <div className="bg-light rounded-xl drop-shadow-principal sm:max-w-72">
       <div className="flex flex-col items-center justify-center gap-4 px-5 py-6">
         <div className="flex flex-col items-center">
-          <h1 className="text-xl font-bold text-black">Assuntos Relevantes</h1>
+          <h1 className="text-xl font-bold text-dark-100">
+            Assuntos Relevantes
+          </h1>
           <div className="w-1/2 h-0.5 bg-principal mt-2 rounded-lg" />
         </div>
         <div className="flex flex-col w-full">
@@ -48,13 +50,13 @@ const RelevantTopics = ({ items = MOCKED_EXAMPLE_DATA }: IRelevantTopics) => {
             <Link
               href={link}
               key={name}
-              className="w-full flex items-center gap-2 border-b border-[#d9d9d9] group cursor-pointer py-2 transition-colors duration-500 ease-out"
+              className="w-full flex items-center gap-2 border-b border-light-gray-200 group cursor-pointer py-2 transition-colors duration-500 ease-out"
             >
               <ArrowRight className="fill-principal size-4" />
-              <span className="flex-1 font-medium text-black group-hover:text-principal/80">
+              <span className="flex-1 font-medium text-dark-100 group-hover:text-principal/80">
                 {name}
               </span>
-              <span className="font-medium text-black group-hover:text-principal/80">
+              <span className="font-medium text-dark-100 group-hover:text-principal/80">
                 ({qtd})
               </span>
             </Link>

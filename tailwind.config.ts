@@ -12,10 +12,20 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
 
-        light: "#FFF",
+        light: "#FFFFFF",
         principal: "#0565FF",
-
-        "dark-100": "#202020",
+        "principal-secondary": "#004AC0",
+        "principal-dark": "#003384",
+        highlight: "#FBC139",
+        dark: {
+          100: "#202020",
+        },
+        "light-gray": {
+          100: "#F6F7FC",
+          200: "#D9D9D9",
+          300: "#C8C8C8",
+          400: "#808080",
+        },
       },
       dropShadow: {
         principal: "0 1px 10px rgba(0, 0, 0, 0.25)",
