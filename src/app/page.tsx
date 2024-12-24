@@ -8,7 +8,7 @@ const maisVisualizados = [
     date: new Date("2024-12-10"),
     title: "Como otimizar o desempenho de aplicações web",
     description:
-      "Aprenda técnicas essenciais para otimizar o desempenho de aplicações web, focando em performance, uso de cache, lazy loading e melhorias no tempo de resposta. Com essas práticas, você pode melhorar a experiência do usuário e a eficiência dos seus sistemas.",
+      "<h1>Aprenda técnicas essenciais</h1> <b>para</b> otimizar o desempenho de aplicações web, focando em performance, uso de cache, lazy loading e melhorias no tempo de resposta. Com essas práticas, você pode melhorar a experiência do usuário e a eficiência dos seus sistemas.",
     image:
       "https://miro.medium.com/v2/resize:fit:2000/1*xzx8MaiCyte-gfmykad87w.jpeg",
   },

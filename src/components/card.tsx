@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 import MetaInfo from "@/components/meta-info";
@@ -25,9 +27,12 @@ const Card = ({ title, description, date, author, image }: ICard) => {
         <h1 className="text-dark-100 pt-1 pb-1 text-xl font-semibold line-clamp-2">
           {title}
         </h1>
-        <p className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4">
-          {description}
-        </p>
+        <div
+          className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4"
+          dangerouslySetInnerHTML={{
+            __html: description,
+          }}
+        />
       </div>
     </div>
   );
