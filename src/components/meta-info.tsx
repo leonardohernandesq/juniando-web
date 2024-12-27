@@ -1,3 +1,4 @@
+import { formatDate } from "@/utils/format-date";
 import React from "react";
 
 interface IMetaInfo {
@@ -6,15 +7,11 @@ interface IMetaInfo {
 }
 
 const MetaInfo = ({ name, date }: IMetaInfo) => {
-  const dateFormatted = new Intl.DateTimeFormat("pt-BR", {
-    timeZone: "UTC",
-  }).format(date);
-
   return (
-    <div className="flex items-center gap-3 text-dark-100 text-sm font-medium">
+    <div className="flex items-center gap-2 text-dark-100 text-xs font-medium">
       <span>{name}</span>
       <span className="bg-principal w-1 h-1 rounded-full" />
-      <span>{dateFormatted}</span>
+      <span>{formatDate(date)}</span>
     </div>
   );
 };
