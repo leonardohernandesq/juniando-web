@@ -9,7 +9,7 @@ import ArrowRight from "./icons/arrow-right";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="md:h-72 h-auto pt-8 md:pt-2 bg-primary relative overflow-hidden">
+    <footer className="md:h-72 h-auto pt-8 md:pt-2 bg-principal-secondary relative overflow-hidden">
       <Image
         className="z-0 absolute left-0 top-0 -rotate-180"
         src={"/images/footer-detail-r.png"}
