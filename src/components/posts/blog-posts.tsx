@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function PostsBlog() {
+export default function BlogPosts() {
   const [content, setContent] = React.useState<string>("");
   React.useEffect(() => {
     async function chamadaApi() {
