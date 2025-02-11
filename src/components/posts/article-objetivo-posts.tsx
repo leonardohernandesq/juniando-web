@@ -10,9 +10,9 @@ export default function ArticleObjetivoPosts({
   children,
 }: articleObjetivo) {
   return (
-    <article>
-      <h1>{title}</h1>
-      {children}
+    <article className="text-center shadow-md rounded-2xl px-4 py-7 w-[290px] flex flex-col">
+      <h1 className="font-bold text-xl">{title}</h1>
+      <span className="text-[14px]">{children}</span>
     </article>
   );
 }
