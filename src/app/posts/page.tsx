@@ -1,3 +1,5 @@
+import ContainerPosts from "@/components/posts/container-posts";
+
 export default function PagePosts() {
-  return <h1>POSTS</h1>;
+  return <ContainerPosts />;
 }
