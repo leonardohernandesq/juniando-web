@@ -5,9 +5,9 @@ import TopicPosts from "./topic-posts";
 
 export default function ContainerPosts() {
   return (
-    <main className="px-[155px] pt-9 grid grid-cols-2 gap-x-24">
+    <main className="px-[155px] pt-9 grid grid-cols-[65%_35%]">
       <BlogPosts />
-      <div className="flex flex-col gap-y-6">
+      <div className="flex flex-col gap-y-6 items-end">
         <ArticleObjetivoPosts title="Juniando">
           Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no
           mercado de trabalho, com dicas e anúncios de vagas para você alavangar
