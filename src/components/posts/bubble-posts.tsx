@@ -2,7 +2,6 @@
 
 import React from "react";
 import ArrowUp from "../icons/arrow-up";
-import { transform } from "next/dist/build/swc/generated-native";
 
 export default function BubblePosts() {
   const bubbleRef = React.useRef<HTMLDivElement | null>(null);
