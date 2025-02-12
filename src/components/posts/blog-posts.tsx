@@ -15,6 +15,8 @@ export default function BlogPosts() {
     chamadaApi();
   }, []);
 
+  if (content === "") return <div className="loader m-auto"></div>;
+
   return (
     <section>
       <Image

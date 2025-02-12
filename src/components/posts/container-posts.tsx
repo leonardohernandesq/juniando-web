@@ -1,8 +1,10 @@
 import React from "react";
-import BlogPosts from "./blog-posts";
 import ArticleObjetivoPosts from "./article-objetivo-posts";
 import TopicPosts from "./topic-posts";
 import BubblePosts from "./bubble-posts";
+import "./loading.css";
+
+const BlogPosts = React.lazy(() => import("./blog-posts"));
 
 export default function ContainerPosts() {
   return (
