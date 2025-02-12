@@ -17,9 +17,11 @@ export default function BubblePosts() {
     function visibilityBubble() {
       if (bubbleRef.current) {
         if (window.scrollY < 10) {
-          bubbleRef.current.classList.add("opacity-0");
+          bubbleRef.current.classList.remove("flex");
+          bubbleRef.current.classList.add("hidden");
         } else {
-          bubbleRef.current.classList.remove("opacity-0");
+          bubbleRef.current.classList.add("flex");
+          bubbleRef.current.classList.remove("hidden");
         }
       }
     }
@@ -32,7 +34,7 @@ export default function BubblePosts() {
     <div
       onClick={scrollTop}
       ref={bubbleRef}
-      className="w-10 h-10 bg-[#FBC139] rounded-full flex items-center justify-center cursor-pointer fixed top-0 opacity-0"
+      className="w-10 h-10 bg-[#FBC139] rounded-full items-center justify-center cursor-pointer fixed top-0 hidden"
     >
       <ArrowUp />
     </div>
