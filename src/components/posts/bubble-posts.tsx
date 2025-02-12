@@ -2,6 +2,7 @@
 
 import React from "react";
 import ArrowUp from "../icons/arrow-up";
+import { transform } from "next/dist/build/swc/generated-native";
 
 export default function BubblePosts() {
   const bubbleRef = React.useRef<HTMLDivElement | null>(null);
@@ -28,15 +29,29 @@ export default function BubblePosts() {
     window.addEventListener("scroll", visibilityBubble);
 
     return () => window.removeEventListener("scroll", visibilityBubble);
-  }, [bubbleRef]);
+  }, []);
 
   return (
     <div
       onClick={scrollTop}
       ref={bubbleRef}
-      className="w-10 h-10 bg-[#FBC139] rounded-full items-center justify-center cursor-pointer fixed top-0 hidden"
+      className="w-10 h-10 bg-[#FBC139] rounded-full items-center justify-center cursor-pointer fixed top-3/4 right-14 z-20 hidden"
+      style={{ animation: "bubble 0.7s ease-in" }}
     >
       <ArrowUp />
+
+      <style>
+        {`
+          @keyframes bubble {
+            from {
+              transform: translateY(-15px);
+            }
+            to {
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
