@@ -6,6 +6,13 @@ import ArrowUp from "../icons/arrow-up";
 export default function BubblePosts() {
   const bubbleRef = React.useRef<HTMLDivElement | null>(null);
 
+  function scrollTop() {
+    scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   React.useEffect(() => {
     function visibilityBubble() {
       if (bubbleRef.current) {
@@ -23,6 +30,7 @@ export default function BubblePosts() {
 
   return (
     <div
+      onClick={scrollTop}
       ref={bubbleRef}
       className="w-10 h-10 bg-[#FBC139] rounded-full flex items-center justify-center cursor-pointer fixed top-0 opacity-0"
     >
