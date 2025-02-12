@@ -2,10 +2,11 @@ import React from "react";
 import BlogPosts from "./blog-posts";
 import ArticleObjetivoPosts from "./article-objetivo-posts";
 import TopicPosts from "./topic-posts";
+import BubblePosts from "./bubble-posts";
 
 export default function ContainerPosts() {
   return (
-    <main className="px-[155px] pt-9 grid grid-cols-[65%_35%]">
+    <main className="px-[155px] pt-9 grid grid-cols-[65%_35%] relative">
       <BlogPosts />
       <div className="flex flex-col gap-y-6 items-end">
         <ArticleObjetivoPosts title="Juniando">
@@ -19,6 +20,7 @@ export default function ContainerPosts() {
           <TopicPosts />
         </ArticleObjetivoPosts>
       </div>
+      <BubblePosts />
     </main>
   );
 }
