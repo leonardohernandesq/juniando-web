@@ -1,6 +1,6 @@
-import React from "react";
+import { Fragment } from "react";
 import ArrowArticlePosts from "../icons/arrow-article";
-import LinhaArticlePosts from "./linha-article-posts";
+import LineArticlePosts from "./line-article-posts";
 
 const topicTech: { tech: string }[] = [
   {
@@ -22,14 +22,14 @@ export default function TopicPosts() {
     <ul className="font-medium">
       {topicTech.map(({ tech }, index) => {
         return (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             <li className="flex items-center py-2 cursor-pointer">
               <ArrowArticlePosts />
               <span className="pl-2">{tech}</span>
               <span className="ml-auto">(2)</span>
             </li>
-            <LinhaArticlePosts />
-          </React.Fragment>
+            <LineArticlePosts />
+          </Fragment>
         );
       })}
     </ul>

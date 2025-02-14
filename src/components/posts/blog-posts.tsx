@@ -3,7 +3,7 @@ import React from "react";
 
 export default async function BlogPosts() {
   const response = await fetch("http://localhost:3000/mock-json/json.json");
-  const { content } = await response.json();
+  const { content }: { content: string } = await response.json();
 
   return (
     <section>
