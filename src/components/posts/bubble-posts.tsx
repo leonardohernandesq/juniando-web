@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import ArrowUp from "../icons/arrow-up";
+import ArrowUp from "@/components/icons/arrow-up";
 
 export default function BubblePosts() {
   const bubbleRef = React.useRef<HTMLDivElement | null>(null);

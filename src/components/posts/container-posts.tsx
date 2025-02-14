@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import ArticleObject from "./article-object-posts";
-import TopicPosts from "./topic-posts";
-import BubblePosts from "./bubble-posts";
+import ArticleObject from "@/components/posts/article-object-posts";
+import TopicPosts from "@/components/posts/topic-posts";
+import BubblePosts from "@/components/posts/bubble-posts";
 
 const BlogPosts = React.lazy(() => import("./blog-posts"));
 

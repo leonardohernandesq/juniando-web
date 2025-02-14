@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import ArrowArticlePosts from "../icons/arrow-article";
-import LineArticlePosts from "./line-article-posts";
+import ArrowArticlePosts from "@/components/icons/arrow-article";
+import LineArticlePosts from "@/components/posts/line-article-posts";
 
 const topicTech: { tech: string }[] = [
   {
