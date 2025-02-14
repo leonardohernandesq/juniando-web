@@ -30,6 +30,17 @@ export default {
       dropShadow: {
         principal: "0 1px 10px rgba(0, 0, 0, 0.25)",
       },
+      backgroundColor: {
+        "bubble-yellow": "#FBC139",
+        "line-blue": "#0565FF"
+      },
+      height: {
+        "one-pixels": "1px",
+        "two-pixels": "2px"
+      },
+      gridTemplateColumns: {
+        "main-posts": "65% 35%"
+      }
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],

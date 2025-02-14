@@ -34,7 +34,7 @@ export default function BubblePosts() {
     <div
       onClick={scrollTop}
       ref={bubbleRef}
-      className="w-10 h-10 bg-[#FBC139] rounded-full items-center justify-center cursor-pointer fixed top-3/4 right-14 z-20 hidden"
+      className="w-10 h-10 bg-bubble-yellow rounded-full items-center justify-center cursor-pointer fixed top-3/4 right-14 z-20 hidden"
       style={{ animation: "bubble 0.7s ease-in" }}
     >
       <ArrowUp />
