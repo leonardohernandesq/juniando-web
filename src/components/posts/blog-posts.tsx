@@ -1,21 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
 
-export default function BlogPosts() {
-  const [content, setContent] = React.useState<string>("");
-  React.useEffect(() => {
-    async function chamadaApi() {
-      const response = await fetch("api");
-      const json: { content: string } = await response.json();
-      setContent(json.content);
-    }
-
-    chamadaApi();
-  }, []);
-
-  if (content === "") return <div className="loader m-auto"></div>;
+export default async function BlogPosts() {
+  const response = await fetch("http://localhost:3000/mock-json/json.json");
+  const { content } = await response.json();
 
   return (
     <section>
