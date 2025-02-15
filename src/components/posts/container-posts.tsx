@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import ArticleObject from "@/components/posts/article-object-posts";
 import TopicPosts from "@/components/posts/topic-posts";
 import BubblePosts from "@/components/posts/bubble-posts";
 
-const BlogPosts = React.lazy(() => import("./blog-posts"));
+const BlogPosts = lazy(() => import("./blog-posts"));
 
 export default function ContainerPosts() {
   return (
