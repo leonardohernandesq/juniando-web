@@ -1,10 +1,11 @@
 import Image from "next/image";
+import MissionBox from "@/components/mission-box";
 
-export default function About() {
+const About = () => {
   return (
     <main>
       <section className="bg-banner-about bg-no-repeat bg-cover bg-center">
-        <div className="max-w-5xl m-auto flex flex-col px-5 pt-72 pb-36 text-white gap-3">
+        <div className="max-w-5xl m-auto flex flex-col px-5 lg:px-0 pt-72 pb-36 text-white gap-5">
           <h1 className="font-bold text-5xl w-full sm:w-80">
             Nosso foco é transformar vidas!
           </h1>
@@ -15,7 +16,7 @@ export default function About() {
           </p>
         </div>
       </section>
-      <section className="py-20 max-w-5xl m-auto flex flex-col-reverse md:flex-row px-5 items-center gap-11">
+      <section className="pt-20 pb-10 max-w-5xl m-auto flex flex-col-reverse px-5 md:flex-row lg:px-0 items-center gap-11">
         <div>
           <h2 className="text-3xl font-bold mb-7 text-dark-100">Quem somos?</h2>
           <p className="text-xl text-dark-100">
@@ -37,6 +38,35 @@ export default function About() {
           height={476}
         />
       </section>
+      <section className="pb-20 max-w-5xl m-auto flex flex-col md:flex-row px-5 lg:px-0 gap-5">
+        <MissionBox
+          icon="mission.png"
+          alt="Icone de uma flecha e de um alvo referindo a missão"
+          title="Missão"
+          description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem maiores architecto modi
+            neque illum impedit cupiditate illo sapiente quaerat atque repellat deleniti laudantium,
+            consequuntur."
+        />
+        <MissionBox
+          icon="vision.png"
+          alt="Icone de uma flecha e de um alvo referindo a missão"
+          title="Visão"
+          description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem maiores architecto modi
+            neque illum impedit cupiditate illo sapiente quaerat atque repellat deleniti laudantium,
+            consequuntur."
+        />
+        <MissionBox
+          icon="value.png"
+          alt="Icone de uma flecha e de um alvo referindo a missão"
+          title="Valores"
+          description="
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem maiores architecto modi
+            neque illum impedit cupiditate illo sapiente quaerat atque repellat deleniti laudantium,
+            consequuntur."
+        />
+      </section>
     </main>
   );
-}
+};
+
+export default About;
