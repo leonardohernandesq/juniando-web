@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import ArrowUp from "@/components/icons/arrow-up";
 
-export default function BubblePosts() {
+export default function Bubble() {
   const [isVisible, setIsVisible] = useState(false);
 
   function scrollTop() {

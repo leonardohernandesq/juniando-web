@@ -1,70 +1,39 @@
-import ArrowRight from "@/components/icons/arrow-right";
-import Link from "next/link";
+import { Fragment } from "react";
 
-export interface Topic {
-  name: string;
-  link: string;
-  qtd: number;
-}
+import ArrowArticlePosts from "@/components/icons/arrow-article";
 
-interface IRelevantTopics {
-  items?: Topic[];
-}
+import LineGray from "@/components/line-gray";
 
-// MOCK
-const MOCKED_EXAMPLE_DATA = [
+const topicTech: { tech: string }[] = [
   {
-    name: "Javascript",
-    link: "/",
-    qtd: 2,
+    tech: "Javascript",
   },
   {
-    name: "ReactJs",
-    link: "/",
-    qtd: 3,
+    tech: "ReactJs",
   },
   {
-    name: "VueJS",
-    link: "/",
-    qtd: 4,
+    tech: "VueJs",
   },
   {
-    name: "AngularJS",
-    link: "/",
-    qtd: 5,
+    tech: "AngularJs",
   },
 ];
 
-const RelevantTopics = ({ items = MOCKED_EXAMPLE_DATA }: IRelevantTopics) => {
+export default function RelevantTopics() {
   return (
-    <div className="bg-light rounded-xl drop-shadow-principal sm:max-w-72">
-      <div className="flex flex-col items-center justify-center gap-4 px-5 py-6">
-        <div className="flex flex-col items-center">
-          <h1 className="text-xl font-bold text-dark-100">
-            Assuntos Relevantes
-          </h1>
-          <div className="w-1/2 h-0.5 bg-principal mt-2 rounded-lg" />
-        </div>
-        <div className="flex flex-col w-full">
-          {items.map(({ link, name, qtd }) => (
-            <Link
-              href={link}
-              key={name}
-              className="w-full flex items-center gap-2 border-b border-light-gray-200 group cursor-pointer py-2 transition-colors duration-500 ease-out"
-            >
-              <ArrowRight className="fill-principal size-4" />
-              <span className="flex-1 font-medium text-dark-100 group-hover:text-principal/80">
-                {name}
-              </span>
-              <span className="font-medium text-dark-100 group-hover:text-principal/80">
-                ({qtd})
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
+    <ul className="font-medium">
+      {topicTech.map(({ tech }, index) => {
+        return (
+          <Fragment key={index}>
+            <li className="flex items-center py-2 cursor-pointer">
+              <ArrowArticlePosts />
+              <span className="pl-2">{tech}</span>
+              <span className="ml-auto">(2)</span>
+            </li>
+            <LineGray />
+          </Fragment>
+        );
+      })}
+    </ul>
   );
-};
-
-export default RelevantTopics;
+}

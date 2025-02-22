@@ -1,3 +1,4 @@
+import Bubble from "@/components/bubble";
 import Card from "@/components/card";
 import HeroSection from "@/components/hero-section";
 
@@ -130,6 +131,7 @@ export default function Home() {
           <Card key={index} {...item} />
         ))}
       </HeroSection>
+      <Bubble />
     </div>
   );
 }

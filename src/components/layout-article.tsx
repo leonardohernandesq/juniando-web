@@ -5,7 +5,7 @@ interface IArticleObject extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
 }
 
-export default function ArticleObjectPosts({
+export default function LayoutArticle({
   title,
   children,
   ...rest

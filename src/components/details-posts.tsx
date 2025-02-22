@@ -5,7 +5,7 @@ interface IBlogPosts {
   data: string;
 }
 
-export default async function BlogPosts({ image, data }: IBlogPosts) {
+export default async function DetailsPosts({ image, data }: IBlogPosts) {
   return (
     <section>
       <Image src={image} alt="post-image" width={744} height={440} />
