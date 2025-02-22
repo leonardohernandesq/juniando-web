@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'banner-about': "url('/images/about-us.jpg')",
+        "banner-about": "url('/images/about-us.jpg')",
       },
       colors: {
         background: "var(--background)",
@@ -35,15 +35,15 @@ export default {
       },
       backgroundColor: {
         "bubble-yellow": "#FBC139",
-        "line-blue": "#0565FF"
+        "line-blue": "#0565FF",
       },
       height: {
         "one-pixels": "1px",
-        "two-pixels": "2px"
+        "two-pixels": "2px",
       },
-      gridTemplateColumns: {
-        "main-posts": "65% 35%"
-      }
+      maxWidth: {
+        page: "1440px",
+      },
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],

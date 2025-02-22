@@ -1,8 +1,11 @@
 "use client";
 
+import { useCallback } from "react";
+
 import Image from "next/image";
 
 import MetaInfo from "@/components/meta-info";
+import { useRouter } from "next/navigation";
 
 interface ICard {
   date: Date;
@@ -13,8 +16,17 @@ interface ICard {
 }
 
 const Card = ({ title, description, date, author, image }: ICard) => {
+  const router = useRouter();
+
+  const openPost = useCallback(() => {
+    router.push("/posts");
+  }, []);
+
   return (
-    <div className="bg-light rounded-b-xl drop-shadow-principal">
+    <div
+      className="bg-light rounded-b-xl drop-shadow-principal cursor-pointer"
+      onClick={openPost}
+    >
       <Image
         src={image}
         alt={title}

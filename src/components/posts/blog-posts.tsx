@@ -1,19 +1,15 @@
 import Image from "next/image";
 
-export default async function BlogPosts() {
-  const response = await fetch("http://localhost:3000/mock-json/json.json");
-  const { content }: { content: string } = await response.json();
+interface IBlogPosts {
+  image: string;
+  data: string;
+}
 
+export default async function BlogPosts({ image, data }: IBlogPosts) {
   return (
     <section>
-      <Image
-        src={"/images/post-react.png"}
-        alt="post-image"
-        width={744}
-        height={440}
-      />
-
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      <Image src={image} alt="post-image" width={744} height={440} />
+      <div dangerouslySetInnerHTML={{ __html: data }} />
     </section>
   );
 }
