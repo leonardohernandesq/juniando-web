@@ -6,7 +6,7 @@ interface HeroSectionProps extends PropsWithChildren {
 
 const HeroSection = ({ title, children }: HeroSectionProps) => {
   return (
-    <section className="flex flex-col items-start justify-start gap-5 p-4 w-full">
+    <section className="flex flex-col items-start justify-start gap-5 py-4 w-full">
       <div className="flex flex-col max-sm:justify-center max-sm:w-full">
         <h1 className="text-xl font-bold text-dark-100">{title}</h1>
         <div className="w-full max-sm:max-w-48 h-0.5 bg-principal mt-2 rounded-lg" />

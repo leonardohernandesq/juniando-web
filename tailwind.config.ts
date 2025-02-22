@@ -42,7 +42,7 @@ export default {
         "two-pixels": "2px",
       },
       maxWidth: {
-        page: "1440px",
+        page: "1140px",
       },
     },
   },

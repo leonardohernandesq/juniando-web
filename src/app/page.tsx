@@ -1,6 +1,9 @@
 import Bubble from "@/components/bubble";
 import Card from "@/components/card";
 import HeroSection from "@/components/hero-section";
+import LayoutArticle from "@/components/layout-article";
+import PrincipalCard from "@/components/principal-card";
+import RelevantTopics from "@/components/relevant-topics";
 
 // MOCK
 const maisVisualizados = [
@@ -119,19 +122,42 @@ const ultimosPosts = [
 
 export default function Home() {
   return (
-    <div className="max-w-5xl m-auto flex flex-col">
-      <HeroSection title="Mais Visualizados">
-        {maisVisualizados.map((item, index) => (
-          <Card key={index} {...item} />
-        ))}
-      </HeroSection>
+    <div className="max-w-page m-auto px-4">
+      <div className="w-full mt-10 flex justify-between gap-4">
+        <PrincipalCard
+          image="/images/post-react-2.png"
+          author="Lucas Lima"
+          date="02/20/2025"
+          title="Por que e quando usar react?"
+        />
+        <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex">
+          <LayoutArticle title="Juniando">
+            Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no
+            mercado de trabalho, com dicas e anúncios de vagas para você
+            alavangar sua carreira.
+          </LayoutArticle>
 
-      <HeroSection title="Últimos Posts">
-        {ultimosPosts.map((item, index) => (
-          <Card key={index} {...item} />
-        ))}
-      </HeroSection>
-      <Bubble />
+          <LayoutArticle title="Assuntos Relevantes">
+            <div className="mx-auto w-24 h-two-pixels rounded-2xl bg-line-blue md:m-0 md:mx-auto lg:mx-auto lg:my-1" />
+            <RelevantTopics />
+          </LayoutArticle>
+        </div>
+      </div>
+
+      <div>
+        <HeroSection title="Mais Visualizados">
+          {maisVisualizados.map((item, index) => (
+            <Card key={index} {...item} />
+          ))}
+        </HeroSection>
+
+        <HeroSection title="Últimos Posts">
+          {ultimosPosts.map((item, index) => (
+            <Card key={index} {...item} />
+          ))}
+        </HeroSection>
+        <Bubble />
+      </div>
     </div>
   );
 }
