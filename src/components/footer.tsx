@@ -3,6 +3,7 @@
 import Image from "next/image";
 import FooterMenu from "./footer-menu";
 import useContributors from "../hooks/useContributors";
+import Link from "next/link";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -59,9 +60,9 @@ const Footer = () => {
             {contributors.length > 0 && (
               <>
                 <h3 className="mt-4 mb-2 font-bold">Contribuidores</h3>
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-5 gap-2 items-end">
                   {contributors.map((contributor) => (
-                    <a
+                    <Link
                       key={contributor.login}
                       title={contributor.login}
                       href={contributor.html_url}
@@ -76,8 +77,18 @@ const Footer = () => {
                         height={80}
                         className="rounded-full"
                       />
-                    </a>
+                    </Link>
                   ))}
+                  <Link
+                    className="text-2xl"
+                    href={
+                      "https://github.com/ilucaslima/juniando-web/graphs/contributors"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ...
+                  </Link>
                 </div>
               </>
             )}
