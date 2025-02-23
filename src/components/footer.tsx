@@ -1,15 +1,41 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
-import { Input } from "./input";
-import Linkedin from "./icons/linkedin";
-import Instagram from "./icons/instagram";
-import Github from "./icons/github";
-import ArrowRight from "./icons/arrow-right";
+import FooterMenu from "./footer-menu";
+import useContributors from "../hooks/useContributors";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { contributors } = useContributors("ilucaslima", "juniando-web");
+
+  const footerMenuCol1 = [
+    { href: "#", children: "Quem Somos" },
+    { href: "#", children: "Vagas" },
+    { href: "#", children: "Artigos" },
+    { href: "#", children: "Política de Privacidade" },
+    { href: "#", children: "Área Reservada" },
+  ];
+
+  const footerMenuCol2 = [
+    { href: "#", children: "React" },
+    { href: "#", children: "NextJS" },
+    { href: "#", children: "JavaScript" },
+    { href: "#", children: "Python" },
+    { href: "#", children: "C#" },
+    { href: "#", children: "Java" },
+    { href: "#", children: "NodeJS" },
+  ];
+
+  const footerMenuCol3 = [
+    { href: "#", children: "Frontend Jr" },
+    { href: "#", children: "Backend Jr" },
+    { href: "#", children: "FullStack Jr" },
+    { href: "#", children: "Trainee" },
+    { href: "#", children: "Estagio" },
+  ];
+
   return (
-    <footer className="md:h-72 h-auto pt-8 md:pt-2 bg-principal-secondary relative overflow-hidden">
+    <footer className="pt-16 bg-principal-secondary relative overflow-hidden">
       <Image
         className="z-0 absolute left-0 top-0 -rotate-180"
         src={"/images/footer-detail-r.png"}
@@ -19,56 +45,48 @@ const Footer = () => {
         quality={100}
       />
       <div className="relative z-10 h-full flex flex-col">
-        <div className="grid grid-cols-1 w-full max-w-md m-auto flex-1 justify-items-center items-center gap-4 px-5 md:grid-cols-3 md:max-w-6xl md:gap-32">
-          <div className="flex flex-col items-center">
+        <div className="grid grid-cols-1 w-full max-w-md m-auto flex-1 justify-items-center gap-4 px-5 md:grid-cols-4 md:max-w-6xl md:gap-14 text-white ">
+          <div className="flex flex-col w-full">
             <Image
               src={"/images/logo-white.png"}
-              alt="Logotipo do Juniando"
-              width={184}
-              height={122}
+              alt="Logo da Juniando"
+              width={120}
+              height={78}
             />
-            <div className="flex gap-3 mt-2">
-              <Link
-                className="hover:scale-110 duration-500"
-                href={"https://linkedin.com"}
-                target="_blank"
-              >
-                <Linkedin className="stroke-white stroke-2" />
-              </Link>
-              <Link
-                className="hover:scale-110 duration-500"
-                href={"https://instagram.com"}
-                target="_blank"
-              >
-                <Instagram className="stroke-white stroke-2" />
-              </Link>
-              <Link
-                className="hover:scale-110 duration-500"
-                href={"https://github.com"}
-                target="_blank"
-              >
-                <Github className="stroke-white stroke-2" />
-              </Link>
-            </div>
+            <p className="mt-4">
+              Onde a tecnologia encontra e impulsiona novos talentos!
+            </p>
+            {contributors.length > 0 && (
+              <>
+                <h3 className="mt-4 mb-2 font-bold">Contribuidores</h3>
+                <div className="grid grid-cols-5 gap-2">
+                  {contributors.map((contributor) => (
+                    <a
+                      key={contributor.login}
+                      title={contributor.login}
+                      href={contributor.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-center"
+                    >
+                      <Image
+                        src={contributor.avatar_url}
+                        alt={`Avatar de ${contributor.login}`}
+                        width={80}
+                        height={80}
+                        className="rounded-full"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-          <Image
-            className="hidden md:flex"
-            src={"/images/illustration-footer.png"}
-            alt="Logotipo do Juniando"
-            width={200}
-            height={200}
-          />
-          <form className="flex flex-col gap-3 w-full">
-            <Input isTextarea placeholder="Deixe sua mensagem" rows={5} />
-            <div className="flex gap-3 w-full">
-              <Input placeholder="Digite seu e-mail" />
-              <button className="bg-yellow-500 w-11 h-10 rounded-lg flex items-center justify-center">
-                <ArrowRight className=" fill-white" />
-              </button>
-            </div>
-          </form>
+          <FooterMenu title="Menu" links={footerMenuCol1} />
+          <FooterMenu title="Artigos" links={footerMenuCol2} />
+          <FooterMenu title="Vagas" links={footerMenuCol3} />
         </div>
-        <p className="text-center pb-2 pt-8 md:pt-4 opacity-70 text-white">
+        <p className="text-center pb-2 pt-16 opacity-70 text-white">
           Copyright © 2022-{currentYear} - Juniando
         </p>
       </div>
