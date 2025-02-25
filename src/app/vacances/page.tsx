@@ -18,12 +18,16 @@ export default async function PageVacances() {
   const json: IResponseJson = await response.json();
   console.log(json.record.posts);
   return (
-    <div>
+    <div className="bg-gray-pattern">
       <TitleVacances />
 
       <SearchVacances />
 
       <EspecialityVacances />
+
+      <h1 className="font-bold text-2xl text-center pb-11">
+        Vagas Disponíveis
+      </h1>
     </div>
   );
 }

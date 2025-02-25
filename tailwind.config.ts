@@ -16,6 +16,7 @@ export default {
         foreground: "var(--foreground)",
         "blue-dark": "var(--blue-dark)",
         "yellow-title": "var(--yellow-title)",
+        "gray-pattern": "var(--gray-pattern)",
         light: "#FFFFFF",
         principal: "#0565FF",
         "principal-secondary": "#004AC0",
