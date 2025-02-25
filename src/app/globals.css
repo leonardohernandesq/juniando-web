@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --blue-dark: #003384;
 }
 
 @media (max-width: 1080px) {
