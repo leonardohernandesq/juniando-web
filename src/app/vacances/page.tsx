@@ -1,5 +1,7 @@
+import EspecialityVacances from "@/components/vacances/especiality-vacances";
+import SearchVacances from "@/components/vacances/search-vacances";
+import TitleVacances from "@/components/vacances/title-vacances";
 import IResponseJson from "@/models/response-json.interface";
-import Image from "next/image";
 
 export default async function PageVacances() {
   const response = await fetch(
@@ -17,22 +19,11 @@ export default async function PageVacances() {
   console.log(json.record.posts);
   return (
     <div>
-      <div className="bg-blue-dark text-center text-4xl py-20 text-white font-semibold mb-11">
-        Vagas para <br />{" "}
-        <span className="text-yellow-title">Desenvolvedores Jr</span>
-      </div>
+      <TitleVacances />
 
-      <div className="flex border border-dark-blue w-[468px] h-12 items-center justify-between rounded-full px-8 mb-11 mx-auto">
-        <input type="text w-full" placeholder="Pesquise por vagas..." />
-        <span>
-          <Image
-            src={"/images/search.png"}
-            width={24}
-            height={24}
-            alt="search"
-          />
-        </span>
-      </div>
+      <SearchVacances />
+
+      <EspecialityVacances />
     </div>
   );
 }
