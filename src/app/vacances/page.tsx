@@ -15,8 +15,9 @@ export default async function PageVacances() {
   const json: IResponseJson = await response.json();
   console.log(json.record.posts);
   return (
-    <div>
-      Vagas para <span>Desenvolvedores Jr</span>
+    <div className="bg-blue-dark text-center text-4xl py-20 text-white font-semibold">
+      Vagas para <br />{" "}
+      <span className="text-yellow-title">Desenvolvedores Jr</span>
     </div>
   );
 }
