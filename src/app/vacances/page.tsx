@@ -15,10 +15,10 @@ export default async function PageVacances() {
     }
   );
   const json: IResponseJson = await response.json();
-  console.log(json.record.posts[0].author);
+  console.log(json);
   return (
     <Suspense fallback={<Loading />}>
-      <div className="bg-gray-pattern pb-20">
+      <div className="lg:bg-gray-pattern lg:pb-20 relative">
         <Bubble />
 
         <TitleVacances />
@@ -27,20 +27,13 @@ export default async function PageVacances() {
 
         <EspecialityVacances />
 
-        <h1 className="font-bold text-2xl text-center pb-11">
+        <h1 className="lg:font-bold lg:text-2xl lg:text-center lg:pb-11">
           Vagas Disponíveis
         </h1>
 
-        <div className="grid grid-cols-3 px-40 gap-6 pb-20">
-          <ArticleVacances />
-          <ArticleVacances />
-          <ArticleVacances />
-          <ArticleVacances />
-          <ArticleVacances />
-          <ArticleVacances />
-        </div>
+        <ArticleVacances />
 
-        <button className="font-bold border border-blue-dark rounded-3xl p-3 block mx-auto">
+        <button className="lg:font-bold lg:border lg:border-blue-dark lg:rounded-3xl lg:p-3 lg:block lg:mx-auto">
           Ver mais vagas
         </button>
       </div>
