@@ -1,4 +1,5 @@
 import CameraIcon from "@/components/icons/camera";
+import Image from "next/image";
 
 interface ProfileImageProps {
   image: string | null;
@@ -45,7 +46,9 @@ export function ProfileImage({
     <div className="relative">
       <div className="w-36 h-36 bg-principal text-white flex items-center justify-center text-2xl font-bold rounded-full mt-16">
         {image ? (
-          <img
+          <Image
+            width={144}
+            height={144}
             src={image}
             alt="Photo"
             className="w-full h-full rounded-full object-cover"
