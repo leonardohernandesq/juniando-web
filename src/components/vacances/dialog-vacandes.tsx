@@ -33,15 +33,15 @@ export default function DialogVacances({
       />
       <dialog
         open
-        className="fixed z-20 flex flex-col bottom-2 rounded-md md:-bottom-32 md:my-40 md:mx-72 md:p-12"
+        className="fixed z-20 flex flex-col bottom-2 rounded-md md:-bottom-44 md:mx-32 md:my-52 lg:my-40 lg:mx-72 lg:p-12 lg:-bottom-32"
         onClick={(e) => e.stopPropagation()}
       >
         <span
-          className="text-xs m-2 md:text-sm"
+          className="text-xs m-2 lg:text-sm"
           dangerouslySetInnerHTML={{ __html: content }}
         ></span>
 
-        <button className="my-2 p-3 text-white font-bold block mx-auto  bg-blue-600 rounded-xl md:mb-0 md:mt-9">
+        <button className="my-2 p-3 text-white font-bold block mx-auto  bg-blue-600 rounded-xl md:my-3 lg:mb-0 lg:mt-9">
           Ver mais vagas
         </button>
       </dialog>
