@@ -3,4 +3,7 @@ import IPosts from "./posts.interface";
 
 export default interface IRecordPosts {
   posts: IPosts[];
+  jobs: {
+    description: string;
+  }[];
 }

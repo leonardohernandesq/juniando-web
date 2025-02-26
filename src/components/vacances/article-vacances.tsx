@@ -1,7 +1,14 @@
-import Image from "next/image";
-import SignInButton from "./sign-in-button-vacances";
+"use client";
 
-export default function ArticleVacances() {
+import Image from "next/image";
+import DialogVacances from "./dialog-vacandes";
+import { useState } from "react";
+
+export default function ArticleVacances({
+  contentDialog,
+}: {
+  contentDialog: string;
+}) {
   const jobss = [
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -95,6 +102,8 @@ export default function ArticleVacances() {
     },
   ];
 
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+
   return (
     <div className="lg:grid lg:grid-cols-3 lg:px-40 lg:gap-6 lg:pb-20">
       {jobss.map((job, index) => {
@@ -128,8 +137,18 @@ export default function ArticleVacances() {
 
             <div className="lg:flex lg:justify-between lg:items-center lg:pt-5">
               <span className="lg:font-bold">{job.salary}</span>
-              <SignInButton />
+              <button
+                onClick={() => setOpenDialog(!openDialog)}
+                className="lg:bg-blue-dark lg:rounded-full lg:text-white lg:py-1 lg:px-3 lg:font-bold"
+              >
+                Cadastre-se
+              </button>
             </div>
+            <DialogVacances
+              openDialog={openDialog}
+              content={contentDialog}
+              onClose={() => setOpenDialog(!openDialog)}
+            />
           </article>
         );
       })}
