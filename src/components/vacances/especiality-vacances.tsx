@@ -19,11 +19,11 @@ export default function EspecialityVacances() {
   ];
 
   return (
-    <div className="lg:flex lg:justify-center lg:gap-x-11 lg:pb-10">
+    <div className="flex justify-center gap-x-4 pb-10 md:gap-x-11">
       {especialities.map(({ especiality }, index) => (
         <div
           key={index}
-          className={`${selectedEspeciality === especiality ? "lg:bg-blue-600 lg:text-white" : "lg:bg-white lg:text-black"} lg:py-4 lg:px-6 lg:rounded-2xl lg:cursor-pointer lg:font-bold lg:shadow-md`}
+          className={`${selectedEspeciality === especiality ? "bg-blue-600 text-white" : "bg-white text-black"} py-4 px-6 rounded-2xl cursor-pointer font-bold shadow-md text-nowrap`}
           onClick={() => setSelectedEspeciality(especiality)}
         >
           {especiality}

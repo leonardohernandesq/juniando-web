@@ -105,15 +105,12 @@ export default function ArticleVacances({
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   return (
-    <div className="lg:grid lg:grid-cols-3 lg:px-40 lg:gap-6 lg:pb-20">
+    <div className="grid grid-cols-1 px-4 gap-6 pb-20 lg:grid-cols-3 md:px-40">
       {jobss.map((job, index) => {
         return (
-          <article
-            key={index}
-            className="lg:bg-white lg:p-5 lg:rounded-xl lg:shadow-md"
-          >
-            <div className="lg:flex lg:gap-x-3 lg:pb-6 lg:items-center">
-              <div className="lg:min-w-11">
+          <article key={index} className="bg-white p-5 rounded-xl shadow-md">
+            <div className="flex gap-x-3 pb-6 items-center">
+              <div className="min-w-11">
                 <Image
                   src={"/images/avatar.png"}
                   width={45}
@@ -121,25 +118,23 @@ export default function ArticleVacances({
                   alt="avatar"
                 />
               </div>
-              <div className="lg:flex lg:flex-col lg:text-nowrap">
-                <span className="lg:font-bold lg:text-sm">
+              <div className="flex flex-col text-nowrap">
+                <span className="font-bold text-sm">
                   {job["recruiter-enterprise"]}
                 </span>
-                <em className="lg:text-xs">({job.modality})</em>
+                <em className="text-xs">({job.modality})</em>
               </div>
             </div>
 
-            <h1 className="lg:text-xl lg:font-bold lg:pb-3">
-              {job["job-title"]}
-            </h1>
+            <h1 className="text-xl font-bold pb-3">{job["job-title"]}</h1>
 
             <em>{job.description}</em>
 
-            <div className="lg:flex lg:justify-between lg:items-center lg:pt-5">
-              <span className="lg:font-bold">{job.salary}</span>
+            <div className="flex justify-between items-center pt-5">
+              <span className="font-bold">{job.salary}</span>
               <button
                 onClick={() => setOpenDialog(!openDialog)}
-                className="lg:bg-blue-dark lg:rounded-full lg:text-white lg:py-1 lg:px-3 lg:font-bold"
+                className="bg-blue-dark rounded-full text-white py-1 px-3 font-bold"
               >
                 Cadastre-se
               </button>

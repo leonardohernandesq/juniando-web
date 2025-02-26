@@ -29,7 +29,7 @@ export default async function PageVacances() {
   console.log(json.record.jobs[0].description);
   return (
     <Suspense fallback={<Loading />}>
-      <div className="lg:bg-gray-pattern lg:pb-20">
+      <div className="bg-gray-pattern pb-20">
         <Bubble />
 
         <TitleVacances />
@@ -38,13 +38,13 @@ export default async function PageVacances() {
 
         <EspecialityVacances />
 
-        <h1 className="lg:font-bold lg:text-2xl lg:text-center lg:pb-11">
+        <h1 className="font-bold text-2xl text-center pb-11">
           Vagas Disponíveis
         </h1>
 
         <ArticleVacances contentDialog={json.record.jobs[0].description} />
 
-        <button className="lg:font-bold lg:border lg:border-blue-dark lg:rounded-3xl lg:p-3 lg:block lg:mx-auto">
+        <button className="font-bold border border-blue-dark rounded-3xl p-3 block mx-auto">
           Ver mais vagas
         </button>
       </div>

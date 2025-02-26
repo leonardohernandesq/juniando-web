@@ -13,13 +13,13 @@ export default function DialogVacances({
 }) {
   useEffect(() => {
     if (openDialog) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("overflow-hidden");
     } else {
-      document.body.style.overflow = "auto";
+      document.body.classList.add("overflow-auto");
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("overflow-hidden");
     };
   }, [openDialog]);
 
@@ -33,12 +33,15 @@ export default function DialogVacances({
       />
       <dialog
         open
-        className="p-12 fixed z-20 my-40 mx-72 rounded-md -bottom-44"
+        className="fixed z-20 flex flex-col bottom-2 rounded-md md:-bottom-32 md:my-40 md:mx-72 md:p-12"
         onClick={(e) => e.stopPropagation()}
       >
-        <span dangerouslySetInnerHTML={{ __html: content }}></span>
+        <span
+          className="text-xs m-2 md:text-sm"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></span>
 
-        <button className="p-3 text-white font-bold block mx-auto mt-9 bg-blue-600 rounded-xl">
+        <button className="my-2 p-3 text-white font-bold block mx-auto  bg-blue-600 rounded-xl md:mb-0 md:mt-9">
           Ver mais vagas
         </button>
       </dialog>

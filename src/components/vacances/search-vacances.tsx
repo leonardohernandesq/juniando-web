@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export default function SearchVacances() {
   return (
-    <div className="lg:flex border lg:border-blue-dark lg:w-[468px] lg:h-12 lg:items-center lg:justify-between lg:rounded-full lg:px-8 lg:mb-11 lg:mx-auto lg:bg-white">
+    <div className="w-[300px] flex border border-blue-dark  h-12 items-center justify-between rounded-full px-8 mb-11 mx-auto bg-white md:w-[468px]">
       <input
         type="text"
         placeholder="Pesquise por vagas..."
-        className="lg:w-full lg:outline-none lg:pr-1"
+        className="w-full outline-none pr-1"
       />
-      <span className="lg:cursor-pointer">
+      <span className="cursor-pointer">
         <Image src={"/images/search.png"} width={24} height={24} alt="search" />
       </span>
     </div>
