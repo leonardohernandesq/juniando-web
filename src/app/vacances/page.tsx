@@ -1,22 +1,11 @@
 import Bubble from "@/components/bubble";
 import Loading from "@/components/loading";
 import ArticleVacances from "@/components/vacances/article-vacances";
-import DialogVacances from "@/components/vacances/dialog-vacandes";
 import EspecialityVacances from "@/components/vacances/especiality-vacances";
 import SearchVacances from "@/components/vacances/search-vacances";
 import TitleVacances from "@/components/vacances/title-vacances";
-import IResponseJson from "@/models/response-json.interface";
+import IResponseApi from "@/models/response-api.interface";
 import { Suspense } from "react";
-
-const mockJob = {
-  titleJob: "Desenvolvedor Back-end Jr",
-  description:
-    "Criar e desenvolver softwares, sistemas, sites, aplicativos e soluções para plataformas web, desktop e mobile. Escrever códigos bem estruturados, eficientes e testáveis utilizando as melhores práticas de desenvolvimento de softwares; Criar layout/interface de usuário de sites usando práticas padrão de HTML/CSS; Integrar dados de vários serviços de back-end e bancos de dados; Reunir e refinar especificações e requisitos com base em necessidades técnicas; Criar e manter documentação de softwares.",
-  benefits: ["Estacionamento", "Restaurante na empresa"],
-  formation:
-    "FORMAÇÃO: Técnico em TI ou cursando Superior em Análise e Desenvolvimento de Sistemas",
-  email: "lucaslima@gmail.com",
-};
 
 export default async function PageVacances() {
   const response = await fetch(
@@ -25,8 +14,8 @@ export default async function PageVacances() {
       cache: "no-cache",
     }
   );
-  const json: IResponseJson = await response.json();
-  console.log(json.record.jobs[0].description);
+  const json: IResponseApi = await response.json();
+  console.log(json.record);
   return (
     <Suspense fallback={<Loading />}>
       <div className="bg-gray-pattern pb-20">

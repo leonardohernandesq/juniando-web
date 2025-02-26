@@ -2,7 +2,7 @@
 import IMetadataPosts from "./metadata-posts.interface";
 import IRecordPosts from "./record-posts.interface";
 
-export default interface IResponseJson {
+export default interface IResponseApi {
   record: IRecordPosts;
   metadata: IMetadataPosts;
 }

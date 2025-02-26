@@ -1,19 +1,15 @@
 import IAuthor from "./author.interface";
 
 /* eslint-disable semi */
-export default interface IPosts {
+export default interface IJobs {
   id: number;
   title: string;
-  slug: string;
-  likes: number;
   views: number;
-  status: string;
-  featured: boolean;
   author: IAuthor;
-  createdAt: string;
+  createdAt: string | null;
   updatedAt: string | null;
   deletedAt: string | null;
-  image: string;
+  logo: string;
   description: string;
   tags: string[];
 }
