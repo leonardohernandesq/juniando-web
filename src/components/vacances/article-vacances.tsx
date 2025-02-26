@@ -27,13 +27,13 @@ export default function ArticleVacances() {
           <span className="font-bold text-sm">
             {jobs["recruiter-enterprise"]}
           </span>
-          <i className="text-xs">({jobs.modality})</i>
+          <em className="text-xs">({jobs.modality})</em>
         </div>
       </div>
 
       <h1 className="text-xl font-bold pb-3">{jobs["job-title"]}</h1>
 
-      <i>{jobs.description}</i>
+      <em>{jobs.description}</em>
 
       <div className="flex justify-between items-center pt-5">
         <span className="font-bold">{jobs.salary}</span>

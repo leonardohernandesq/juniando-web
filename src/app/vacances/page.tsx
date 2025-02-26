@@ -18,7 +18,7 @@ export default async function PageVacances() {
   console.log(json.record.posts[0].author);
   return (
     <Suspense fallback={<Loading />}>
-      <div className="bg-gray-pattern">
+      <div className="bg-gray-pattern pb-20">
         <Bubble />
 
         <TitleVacances />
@@ -39,6 +39,10 @@ export default async function PageVacances() {
           <ArticleVacances />
           <ArticleVacances />
         </div>
+
+        <button className="font-bold border border-blue-dark rounded-3xl p-3 block mx-auto">
+          Ver mais vagas
+        </button>
       </div>
     </Suspense>
   );
