@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface IFork {
   owner: {
@@ -11,11 +12,11 @@ interface IFork {
   };
 }
 
-interface ForksListProps {
+interface IForksListProps {
   priorityContribuitors?: string[];
 }
 
-const ForksList = ({ priorityContribuitors }: ForksListProps) => {
+const ForksList = ({ priorityContribuitors }: IForksListProps) => {
   const owner = "ilucaslima";
   const repo = "juniando-web";
   const limit = 5;
@@ -37,7 +38,6 @@ const ForksList = ({ priorityContribuitors }: ForksListProps) => {
         let priorityForks: IFork[] = [];
         let otherForks: IFork[] = data;
 
-        // Adicionar manualmente o dono do repositório como o primeiro
         const ownerFork: IFork = {
           owner: {
             login: owner,
@@ -57,7 +57,6 @@ const ForksList = ({ priorityContribuitors }: ForksListProps) => {
           );
         }
 
-        // Selecionar aleatoriamente os forks restantes até atingir o limite
         while (priorityForks.length < limit && otherForks.length > 0) {
           const randomIndex = Math.floor(Math.random() * otherForks.length);
           priorityForks.push(otherForks.splice(randomIndex, 1)[0]);
@@ -75,22 +74,24 @@ const ForksList = ({ priorityContribuitors }: ForksListProps) => {
   }, []);
 
   return (
-    <div className="mt-4 flex -space-x-2 overflow-hidden">
+    <div className="mt-2 flex -space-x-2 overflow-hidden items-center">
+      <p className="mr-3 text-sm">Contribuidores: </p>
       {forks.map((fork) => (
-        <a
+        <Link
           key={fork.owner.login}
           href={fork.owner.html_url}
           title={fork.owner.login}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            className="inline-block size-12 rounded-full border-2 border-white shadow-2xl"
+          <Image
+            className="inline-block size-6 rounded-full border-2 border-principal shadow-2xl"
             src={fork.owner.avatar_url}
             alt={fork.owner.login}
-            width={50}
+            width={30}
+            height={30}
           />
-        </a>
+        </Link>
       ))}
     </div>
   );
