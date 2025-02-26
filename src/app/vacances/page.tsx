@@ -15,7 +15,6 @@ export default async function PageVacances() {
     }
   );
   const json: IResponseApi = await response.json();
-  console.log(json.record);
   return (
     <Suspense fallback={<Loading />}>
       <div className="bg-gray-pattern pb-20">
