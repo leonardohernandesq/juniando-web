@@ -23,7 +23,7 @@ export default function EspecialityVacances() {
       {especialities.map(({ especiality }, index) => (
         <div
           key={index}
-          className={`${selectedEspeciality === especiality ? "bg-blue-600 text-white" : "bg-white text-black"} py-3 px-6 rounded-xl cursor-pointer font-bold shadow-md`}
+          className={`${selectedEspeciality === especiality ? "bg-blue-600 text-white" : "bg-white text-black"} py-4 px-6 rounded-2xl cursor-pointer font-bold shadow-md`}
           onClick={() => setSelectedEspeciality(especiality)}
         >
           {especiality}
