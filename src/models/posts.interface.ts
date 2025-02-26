@@ -1,6 +1,7 @@
-import IAuthor from "./author.interface";
-
 /* eslint-disable semi */
+
+import IAuthor from "@/models/author.interface";
+
 export default interface IPosts {
   id: number;
   title: string;
