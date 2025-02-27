@@ -16,7 +16,7 @@ const PrincipalCard = ({ image, title, author, date }: IPrincipalCard) => {
         alt="post image"
         width={745}
         height={412}
-        className="h-full max-h-[440px] rounded-lg"
+        className="h-full max-h-principal_car_max rounded-lg"
       />
       <div className="w-full absolute bottom-1 left-0 p-7 pt-20 z-50">
         <div className="-z-10 absolute w-full inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg" />

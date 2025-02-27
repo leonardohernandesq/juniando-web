@@ -9,8 +9,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { ApiResponse } from "../models/api-response";
-import { Post } from "../models/posts";
+import { ApiResponse } from "../interfaces/api-response";
+import { Post } from "../interfaces/posts";
 
 interface PostsContextType {
   posts: Post[];

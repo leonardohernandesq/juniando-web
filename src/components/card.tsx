@@ -5,15 +5,15 @@ import { useCallback } from "react";
 import Image from "next/image";
 
 import MetaInfo from "@/components/meta-info";
-import { Post } from "@/utils/models/posts";
+import { Post } from "@/utils/interfaces/posts";
 import { useRouter } from "next/navigation";
 
-const Card = ({ id, title, description, createdAt, author, image }: Post) => {
+const Card = ({ slug, title, description, createdAt, author, image }: Post) => {
   const router = useRouter();
 
   const openPost = useCallback(() => {
-    router.push(`/posts/${id}`);
-  }, [id, router]);
+    router.push(`/posts/${slug}`);
+  }, [slug, router]);
 
   return (
     <div

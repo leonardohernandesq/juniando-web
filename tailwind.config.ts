@@ -41,6 +41,9 @@ export default {
         "one-pixels": "1px",
         "two-pixels": "2px",
       },
+      maxHeight: {
+        principal_car_max: "440px",
+      },
       maxWidth: {
         page: "1140px",
       },

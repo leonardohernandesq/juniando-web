@@ -9,9 +9,9 @@ import { useAppContext } from "@/utils/context/use-context";
 import { useParams } from "next/navigation";
 
 export default function Posts() {
-  const { id } = useParams();
-  const { posts, setPosts } = useAppContext();
-  const postDetails = posts.find((post) => post.id.toString() === id);
+  const { slug } = useParams();
+  const { posts } = useAppContext();
+  const postDetails = posts.find((post) => post.slug === slug);
 
   if (!postDetails) {
     return <Loading />;

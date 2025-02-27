@@ -1,4 +1,4 @@
-import { Post } from "./models/posts";
+import { Post } from "./interfaces/posts";
 
 export function getMostViewed(posts: Post[]) {
   return [...posts].sort((a, b) => b.views - a.views).slice(0, 6);
