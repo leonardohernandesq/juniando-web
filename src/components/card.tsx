@@ -5,22 +5,15 @@ import { useCallback } from "react";
 import Image from "next/image";
 
 import MetaInfo from "@/components/meta-info";
+import { Post } from "@/utils/models/posts";
 import { useRouter } from "next/navigation";
 
-interface ICard {
-  date: Date;
-  image: string;
-  title: string;
-  author: string;
-  description: string;
-}
-
-const Card = ({ title, description, date, author, image }: ICard) => {
+const Card = ({ id, title, description, createdAt, author, image }: Post) => {
   const router = useRouter();
 
   const openPost = useCallback(() => {
-    router.push("/posts");
-  }, []);
+    router.push(`/posts/${id}`);
+  }, [id, router]);
 
   return (
     <div
@@ -35,7 +28,7 @@ const Card = ({ title, description, date, author, image }: ICard) => {
         height={720}
       />
       <div className="p-8">
-        <MetaInfo name={author} date={date} />
+        <MetaInfo name={author.name} date={createdAt} />
         <h1 className="text-dark-100 pt-1 pb-1 text-xl font-semibold line-clamp-2">
           {title}
         </h1>
