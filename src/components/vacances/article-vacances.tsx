@@ -9,7 +9,7 @@ export default function ArticleVacances({
 }: {
   contentDialog: string;
 }) {
-  const jobss = [
+  const jobs = [
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
       modality: "Remoto",
@@ -19,6 +19,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 1,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -29,6 +30,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 2,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -39,6 +41,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 3,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -49,6 +52,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 4,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -59,6 +63,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 5,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -69,6 +74,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 6,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -79,6 +85,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 7,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -89,6 +96,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 8,
     },
     {
       "recruiter-enterprise": "Helpper - Soluções Inteligentes",
@@ -99,6 +107,7 @@ export default function ArticleVacances({
       description: "João Pessoa - PB, a 12,6 Km de você. Home Office",
       salary: "R$1.200,00",
       especiality: "back-end",
+      id: 9,
     },
   ];
 
@@ -106,9 +115,9 @@ export default function ArticleVacances({
 
   return (
     <div className="grid grid-cols-1 px-4 gap-6 pb-20 lg:grid-cols-3 md:px-40">
-      {jobss.map((job, index) => {
+      {jobs.map((job) => {
         return (
-          <article key={index} className="bg-white p-5 rounded-xl shadow-md">
+          <article key={job.id} className="bg-white p-5 rounded-xl shadow-md">
             <div className="flex gap-x-3 pb-6 items-center">
               <div className="min-w-11">
                 <Image

@@ -43,6 +43,9 @@ export default {
         "one-pixels": "1px",
         "two-pixels": "2px",
       },
+      width: {
+        "search-vacances": "300px"
+      },
       maxWidth: {
         page: "1140px",
       },
