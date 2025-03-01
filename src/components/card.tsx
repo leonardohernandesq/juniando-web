@@ -15,6 +15,10 @@ const Card = ({ slug, title, description, createdAt, author, image }: Post) => {
     router.push(`/posts/${slug}`);
   }, [slug, router]);
 
+  const removeTagsHTML = (inputString: string) => {
+    return inputString.replace(/<[^>]*>/g, "");
+  };
+
   return (
     <div
       className="bg-light rounded-b-xl drop-shadow-principal cursor-pointer"
@@ -32,12 +36,9 @@ const Card = ({ slug, title, description, createdAt, author, image }: Post) => {
         <h1 className="text-dark-100 pt-1 pb-1 text-xl font-semibold line-clamp-2">
           {title}
         </h1>
-        <div
-          className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4"
-          dangerouslySetInnerHTML={{
-            __html: description,
-          }}
-        />
+        <p className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4">
+          {removeTagsHTML(description)}
+        </p>
       </div>
     </div>
   );

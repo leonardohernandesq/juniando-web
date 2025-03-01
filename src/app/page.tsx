@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-page m-auto px-4">
+    <div className="w-full max-w-page m-auto px-4">
       <div className="w-full mt-10 flex justify-between gap-4">
         <PrincipalCard
           image={mainPost[0].image}
