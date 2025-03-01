@@ -9,12 +9,7 @@ import { Suspense } from "react";
 
 export default async function PageVacances() {
   const response = await fetch(
-    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
-    {
-      next: {
-        revalidate: 60 * 60 * 6, // 6 hours
-      },
-    }
+    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64"
   );
   const json: IResponseApi = await response.json();
   return (
