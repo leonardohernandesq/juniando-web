@@ -10,7 +10,7 @@ export default function ArticleVacances({ jobs }: { jobs: IJobs[] }) {
 
   return (
     <div className="grid grid-cols-1 px-4 gap-6 pb-20 lg:grid-cols-3 md:px-40">
-      {jobs.map((job) => {
+      {jobs?.map((job) => {
         return (
           <article key={job.id} className="bg-white p-5 rounded-xl shadow-md">
             <div className="flex gap-x-3 pb-6 items-center">
