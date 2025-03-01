@@ -9,7 +9,7 @@ export const LinksHeader = [
   },
   {
     name: "Vagas",
-    link: "/",
+    link: "/vacances",
   },
   {
     name: "Sobre nós",
