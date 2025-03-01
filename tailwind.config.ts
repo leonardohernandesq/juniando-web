@@ -43,6 +43,9 @@ export default {
         "one-pixels": "1px",
         "two-pixels": "2px",
       },
+      maxHeight: {
+        principal_card_max: "440px",
+      },
       width: {
         "search-vacances": "300px"
       },
