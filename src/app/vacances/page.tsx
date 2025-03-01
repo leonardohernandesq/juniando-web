@@ -30,7 +30,7 @@ export default async function PageVacances() {
           Vagas Disponíveis
         </h1>
 
-        <ArticleVacances contentDialog={json.record.jobs[0].description} />
+        <ArticleVacances jobs={json.record.jobs} />
 
         <button className="font-bold border border-blue-dark rounded-3xl p-3 block mx-auto">
           Ver mais vagas
