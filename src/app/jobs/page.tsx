@@ -12,7 +12,7 @@ export default async function PageVacances() {
     "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
     {
       next: {
-        revalidate: 60 * 2, // 2 minutes
+        revalidate: 60, // 2 minutes
       },
     }
   );
