@@ -9,18 +9,20 @@ import {
   useEffect,
   useState,
 } from "react";
-import { ApiResponse } from "../interfaces/api-response";
-import { Post } from "../interfaces/posts";
+import { ApiResponse } from "../utils/interfaces/api-response";
+import { Post } from "../utils/interfaces/posts";
 
 interface PostsContextType {
   posts: Post[];
   setPosts: Dispatch<SetStateAction<Post[]>>;
+  isLoading: boolean;
 }
 
 const PostsContext = createContext<PostsContextType | undefined>(undefined);
 
 export function PostsProvider({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     try {
@@ -33,17 +35,19 @@ export function PostsProvider({ children }: { children: ReactNode }) {
       fetchPosts();
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, setPosts }}>
+    <PostsContext.Provider value={{ posts, setPosts, isLoading }}>
       {children}
     </PostsContext.Provider>
   );
 }
 
-export function useAppContext() {
+export function usePosts() {
   const context = useContext(PostsContext);
   if (!context)
     throw new Error("usePosts deve ser usado dentro de um PostsProvider");

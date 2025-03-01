@@ -6,11 +6,18 @@ interface IPrincipalCard {
   title: string;
   author: string;
   date: string | Date;
+  click: VoidFunction;
 }
 
-const PrincipalCard = ({ image, title, author, date }: IPrincipalCard) => {
+const PrincipalCard = ({
+  image,
+  title,
+  author,
+  date,
+  click,
+}: IPrincipalCard) => {
   return (
-    <div className="relative">
+    <div className="relative cursor-pointer" onClick={click}>
       <Image
         src={image}
         alt="post image"

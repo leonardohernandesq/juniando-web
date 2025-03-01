@@ -6,20 +6,30 @@ import LayoutArticle from "@/components/layout-article";
 import Loading from "@/components/loading";
 import PrincipalCard from "@/components/principal-card";
 import RelevantTopics from "@/components/relevant-topics";
-import { useAppContext } from "@/utils/context/use-context";
+import { usePosts } from "@/hooks/usePosts";
 import { formatDate } from "@/utils/format-date";
 import {
   getLatestPosts,
   getMainPost,
   getMostViewed,
 } from "@/utils/post-selector";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 export default function Home() {
-  const { posts } = useAppContext();
+  const { posts } = usePosts();
+  const router = useRouter();
 
   const mostViewed = getMostViewed(posts);
   const latestPosts = getLatestPosts(posts);
   const mainPost = getMainPost(posts);
+
+  const openPost = useCallback(
+    (slug: string) => {
+      router.push(`/posts/${slug}`);
+    },
+    [router]
+  );
 
   if (posts.length === 0) {
     return <Loading />;
@@ -33,6 +43,7 @@ export default function Home() {
           author={mainPost[0].author.name}
           date={formatDate(new Date(mainPost[0].createdAt))}
           title={mainPost[0].title}
+          click={() => openPost(mainPost[0].slug)}
         />
 
         <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex">

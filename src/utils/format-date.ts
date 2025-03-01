@@ -1,6 +1,7 @@
 export const formatDate = (date: Date) => {
   const now = new Date();
-  const diffInDays = Math.floor((+now - +date) / (1000 * 60 * 60 * 24));
+  const newDate = new Date(date);
+  const diffInDays = Math.floor((+now - +newDate) / (1000 * 60 * 60 * 24));
 
   if (diffInDays === 0) return "hoje";
   if (diffInDays === 1) return "ontem";

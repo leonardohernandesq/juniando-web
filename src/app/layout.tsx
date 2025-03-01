@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import Header from "@/components/header";
-import { PostsProvider } from "@/utils/context/use-context";
+import { PostsProvider } from "@/hooks/usePosts";
 import Footer from "../components/footer";
 import "./globals.css";
 
