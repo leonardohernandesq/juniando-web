@@ -33,7 +33,7 @@ export default function DialogVacances({
       />
       <dialog
         open
-        className="fixed z-20 flex flex-col bottom-2 rounded-md md:-bottom-44 md:mx-32 md:my-52 lg:my-40 lg:mx-72 lg:p-12 lg:-bottom-32"
+        className="fixed z-20 flex flex-col bottom-20 rounded-md md:-bottom-44 md:mx-32 md:my-52 lg:my-40 lg:mx-72 lg:p-12 lg:-bottom-32"
         onClick={(e) => e.stopPropagation()}
       >
         <span
