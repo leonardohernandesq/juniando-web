@@ -17,7 +17,7 @@ const Footer = () => {
         quality={100}
       />
       <div className="relative z-10 h-full flex flex-col">
-        <div className="grid grid-cols-1 w-full max-w-md m-auto flex-1 justify-items-center gap-4 px-5 md:grid-cols-4 md:max-w-6xl md:gap-14 text-white ">
+        <div className="grid grid-cols-1 w-full max-w-md m-auto flex-1 justify-items-center gap-4 px-5 md:grid-cols-3 md:max-w-6xl md:gap-14 text-white ">
           <div className="flex flex-col w-full">
             <Image
               src={"/images/logo-white.png"}
@@ -32,9 +32,11 @@ const Footer = () => {
               priorityContribuitors={["leonardohernandesq", "Daniel-san8"]}
             />
           </div>
-          <FooterMenu title="Menu" links={footerMenuCol1} />
-          <FooterMenu title="Artigos" links={footerMenuCol2} />
-          <FooterMenu title="Vagas" links={footerMenuCol3} />
+          <div className="grid grid-cols-3 gap-4 pt-4 md:w-full md:gap-48 md:justify-start md:text-nowrap lg:gap-72">
+            <FooterMenu title="Menu" links={footerMenuCol1} />
+            <FooterMenu title="Artigos" links={footerMenuCol2} />
+            <FooterMenu title="Vagas" links={footerMenuCol3} />
+          </div>
         </div>
         <p className="text-center text-sm pb-2 pt-12 opacity-70 text-white">
           Copyright © {currentYear} - Juniando
