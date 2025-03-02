@@ -41,7 +41,7 @@ export default function Home() {
         <PrincipalCard
           image={mainPost[0].image}
           author={mainPost[0].author.name}
-          date={formatDate(new Date(mainPost[0].createdAt))}
+          date={new Date(mainPost[0].createdAt)}
           title={mainPost[0].title}
           click={() => openPost(mainPost[0].slug)}
         />
