@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import Header from "@/components/header";
-import { PostsProvider } from "@/hooks/usePosts";
 import Footer from "../components/footer";
 import "./globals.css";
 
@@ -26,11 +25,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${montserrat.className} bg-light`}>
-        <PostsProvider>
-          <Header />
-          {children}
-          <Footer />
-        </PostsProvider>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );

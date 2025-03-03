@@ -1,23 +1,33 @@
+"use client";
+
 import Image from "next/image";
 import MetaInfo from "./meta-info";
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 interface IPrincipalCard {
+  slug: string;
   image: string;
   title: string;
   author: string;
   date: string | Date;
-  click: VoidFunction;
 }
 
 const PrincipalCard = ({
+  slug,
   image,
   title,
   author,
   date,
-  click,
 }: IPrincipalCard) => {
+  const router = useRouter();
+
+  const openPost = useCallback(() => {
+    router.push(`/posts/${slug}`);
+  }, [slug, router]);
+
   return (
-    <div className="relative cursor-pointer" onClick={click}>
+    <div className="relative cursor-pointer" onClick={openPost}>
       <Image
         src={image}
         alt="post image"

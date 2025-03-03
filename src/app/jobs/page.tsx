@@ -12,11 +12,12 @@ export default async function PageVacances() {
     "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
     {
       next: {
-        revalidate: 60, // 2 minutes
+        revalidate: 60, // 1 min
       },
     }
   );
   const json: IResponseApi = await response.json();
+
   return (
     <Suspense fallback={<Loading />}>
       <div className="bg-gray-pattern pb-20">

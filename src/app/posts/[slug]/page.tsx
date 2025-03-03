@@ -1,22 +1,36 @@
-"use client";
-
 import Bubble from "@/components/bubble";
 import DetailsPosts from "@/components/details-posts";
 import LayoutArticle from "@/components/layout-article";
 import Loading from "@/components/loading";
 import RelevantTopics from "@/components/relevant-topics";
-import { usePosts } from "@/hooks/usePosts";
-import { useParams } from "next/navigation";
 
 import "@/styles/details-post.css";
 import Head from "next/head";
+import { Post } from "@/utils/interfaces/posts";
 
-export default function Posts() {
-  const { slug } = useParams();
-  const { posts, isLoading } = usePosts();
-  const postDetails = posts.find((post) => post.slug === slug);
+interface IPostsDetail {
+  params: {
+    slug: string;
+  };
+}
 
-  if (isLoading || !postDetails) {
+export default async function Posts({ params: { slug } }: IPostsDetail) {
+  const responsePosts = await fetch(
+    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
+    {
+      next: {
+        revalidate: 60 * 60 * 24, // 24 hours
+      },
+    }
+  ).then((res) => {
+    return res.json();
+  });
+
+  const posts = responsePosts.record.posts;
+
+  const postDetails = posts.find((post: Post) => post.slug === slug);
+
+  if (!postDetails) {
     return <Loading />;
   }
 

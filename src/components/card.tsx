@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { HTMLAttributes, useCallback } from "react";
 
 import Image from "next/image";
 
@@ -8,7 +8,23 @@ import MetaInfo from "@/components/meta-info";
 import { Post } from "@/utils/interfaces/posts";
 import { useRouter } from "next/navigation";
 
-const Card = ({ slug, title, description, createdAt, author, image }: Post) => {
+interface ICardProps {
+  slug: string;
+  title: string;
+  description: string;
+  createdAt: Date;
+  author: string;
+  image: string;
+}
+
+const Card = ({
+  slug,
+  title,
+  description,
+  createdAt,
+  author,
+  image,
+}: ICardProps) => {
   const router = useRouter();
 
   const openPost = useCallback(() => {
@@ -21,7 +37,7 @@ const Card = ({ slug, title, description, createdAt, author, image }: Post) => {
 
   return (
     <div
-      className="bg-light rounded-b-xl drop-shadow-principal cursor-pointer"
+      className="bg-light rounded-b-xl drop-shadow-principal cursor-pointer h-full"
       onClick={openPost}
     >
       <Image
@@ -32,7 +48,7 @@ const Card = ({ slug, title, description, createdAt, author, image }: Post) => {
         height={720}
       />
       <div className="p-8">
-        <MetaInfo name={author.name} date={createdAt} />
+        <MetaInfo name={author} date={createdAt} />
         <h1 className="text-dark-100 pt-1 pb-1 text-xl font-semibold line-clamp-2">
           {title}
         </h1>

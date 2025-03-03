@@ -1,4 +1,5 @@
-"use client";
+// "use client";
+
 import Bubble from "@/components/bubble";
 import Card from "@/components/card";
 import HeroSection from "@/components/hero-section";
@@ -6,30 +7,19 @@ import LayoutArticle from "@/components/layout-article";
 import Loading from "@/components/loading";
 import PrincipalCard from "@/components/principal-card";
 import RelevantTopics from "@/components/relevant-topics";
-import { usePosts } from "@/hooks/usePosts";
-import { formatDate } from "@/utils/format-date";
-import {
-  getLatestPosts,
-  getMainPost,
-  getMostViewed,
-} from "@/utils/post-selector";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { Post } from "@/utils/interfaces/posts";
 
-export default function Home() {
-  const { posts } = usePosts();
-  const router = useRouter();
-
-  const mostViewed = getMostViewed(posts);
-  const latestPosts = getLatestPosts(posts);
-  const mainPost = getMainPost(posts);
-
-  const openPost = useCallback(
-    (slug: string) => {
-      router.push(`/posts/${slug}`);
-    },
-    [router]
-  );
+export default async function Home() {
+  const posts = await fetch(
+    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
+    {
+      next: {
+        revalidate: 60, // 1 min
+      },
+    }
+  ).then((res) => {
+    return res.json();
+  });
 
   if (posts.length === 0) {
     return <Loading />;
@@ -39,11 +29,11 @@ export default function Home() {
     <div className="w-full max-w-page m-auto px-4">
       <div className="w-full mt-10 flex justify-between gap-4">
         <PrincipalCard
-          image={mainPost[0].image}
-          author={mainPost[0].author.name}
-          date={new Date(mainPost[0].createdAt)}
-          title={mainPost[0].title}
-          click={() => openPost(mainPost[0].slug)}
+          image={posts.record.posts[0].image}
+          author={posts.record.posts[0].author.name}
+          date={new Date(posts.record.posts[0].createdAt)}
+          title={posts.record.posts[0].title}
+          slug={posts.record.posts[0].slug}
         />
 
         <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex">
@@ -62,14 +52,30 @@ export default function Home() {
 
       <div>
         <HeroSection title="Mais Visualizados">
-          {mostViewed.map((item, index) => (
-            <Card key={index} {...item} />
+          {posts.record.posts.map((item: Post) => (
+            <Card
+              key={item.id}
+              slug={item.slug}
+              title={item.title}
+              description={item.description}
+              createdAt={item.createdAt}
+              author={item.author.name}
+              image={item.image}
+            />
           ))}
         </HeroSection>
 
         <HeroSection title="Últimos Posts">
-          {latestPosts.map((item, index) => (
-            <Card key={index} {...item} />
+          {posts.record.posts.map((item: Post) => (
+            <Card
+              key={item.id}
+              slug={item.slug}
+              title={item.title}
+              description={item.description}
+              createdAt={item.createdAt}
+              author={item.author.name}
+              image={item.image}
+            />
           ))}
         </HeroSection>
         <Bubble />
