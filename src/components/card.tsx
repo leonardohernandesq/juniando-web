@@ -15,6 +15,7 @@ interface ICardProps {
   createdAt: Date;
   author: string;
   image: string;
+  tags: string[];
 }
 
 const Card = ({
@@ -24,6 +25,7 @@ const Card = ({
   createdAt,
   author,
   image,
+  tags,
 }: ICardProps) => {
   const router = useRouter();
 
@@ -47,9 +49,19 @@ const Card = ({
         width={1280}
         height={720}
       />
-      <div className="p-8">
+      <div className="p-8 pt-2">
         <MetaInfo name={author} date={createdAt} />
-        <h1 className="text-dark-100 pt-1 pb-1 text-xl font-semibold line-clamp-2">
+        <div className="flex items-center gap-1 mb-1 mt-2">
+          {tags.slice(0, 3).map((item, index) => (
+            <p
+              className="bg-principal-dark py-1 px-2 text-[8px] font-medium text-light rounded-md"
+              key={item}
+            >
+              {item}
+            </p>
+          ))}
+        </div>
+        <h1 className="text-dark-100 pb-1 text-xl font-semibold line-clamp-2">
           {title}
         </h1>
         <p className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4">

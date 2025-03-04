@@ -26,6 +26,7 @@ const Articles = async () => {
           createdAt={new Date(item.createdAt)}
           author={item.author.name}
           image={item.image}
+          tags={item.tags}
         />
       ))}
     </section>

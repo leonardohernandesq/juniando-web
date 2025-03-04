@@ -21,6 +21,10 @@ export default async function Home() {
     return res.json();
   });
 
+  const principalPost = posts.record.posts.find(
+    (item: Post) => item.featured
+  ) as Post;
+
   if (posts.length === 0) {
     return <Loading />;
   }
@@ -29,11 +33,11 @@ export default async function Home() {
     <div className="w-full max-w-page m-auto px-4">
       <div className="w-full mt-10 flex justify-between gap-4">
         <PrincipalCard
-          image={posts.record.posts[0].image}
-          author={posts.record.posts[0].author.name}
-          date={new Date(posts.record.posts[0].createdAt)}
-          title={posts.record.posts[0].title}
-          slug={posts.record.posts[0].slug}
+          image={principalPost.image}
+          author={principalPost.author.name}
+          date={new Date(principalPost.createdAt)}
+          title={principalPost.title}
+          slug={principalPost.slug}
         />
 
         <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex">
@@ -61,6 +65,7 @@ export default async function Home() {
               createdAt={item.createdAt}
               author={item.author.name}
               image={item.image}
+              tags={item.tags}
             />
           ))}
         </HeroSection>
@@ -75,6 +80,7 @@ export default async function Home() {
               createdAt={item.createdAt}
               author={item.author.name}
               image={item.image}
+              tags={item.tags}
             />
           ))}
         </HeroSection>
