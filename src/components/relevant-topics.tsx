@@ -30,7 +30,7 @@ export default function RelevantTopics() {
               <span className="pl-2">{tech}</span>
               <span className="ml-auto">(2)</span>
             </li>
-            <LineGray />
+            {index !== topicTech.length - 1 && <LineGray />}
           </Fragment>
         );
       })}
