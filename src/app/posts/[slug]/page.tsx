@@ -8,13 +8,11 @@ import "@/styles/details-post.css";
 import Head from "next/head";
 import { Post } from "@/utils/interfaces/posts";
 
-interface IPostsDetail {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function Posts({ params: { slug } }: IPostsDetail) {
+export default async function Posts({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
   const responsePosts = await fetch(
     "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
     {
