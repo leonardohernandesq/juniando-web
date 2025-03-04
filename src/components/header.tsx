@@ -41,7 +41,9 @@ const Header = () => {
             </li>
           ))}
         </ul>
-        <button>Entrar</button>
+        <button className="py-2 px-6 bg-principal font-bold text-light rounded-3xl">
+          Entrar
+        </button>
       </div>
     </header>
   );
