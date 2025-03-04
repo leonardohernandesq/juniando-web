@@ -52,9 +52,9 @@ const Card = ({
       <div className="p-8 pt-2">
         <MetaInfo name={author} date={createdAt} />
         <div className="flex items-center gap-1 mb-1 mt-2">
-          {tags.slice(0, 3).map((item, index) => (
+          {tags.slice(0, 3).map((item) => (
             <p
-              className="bg-principal-dark py-1 px-2 text-[8px] font-medium text-light rounded-md"
+              className="bg-principal-dark py-1 px-2 text-xxs font-medium text-light rounded-md"
               key={item}
             >
               {item}

@@ -47,10 +47,13 @@ export default {
         principal_card_max: "440px",
       },
       width: {
-        "search-vacances": "300px"
+        "search-vacances": "300px",
       },
       maxWidth: {
         page: "1140px",
+      },
+      fontSize: {
+        xxs: "8px",
       },
     },
   },
