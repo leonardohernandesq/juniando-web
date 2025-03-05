@@ -37,9 +37,9 @@ const PrincipalCard = ({
       />
       <div className="w-full absolute bottom-1 left-0 p-7 pt-20 z-50">
         <div className="-z-10 absolute w-full inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg" />
-        <h1 className="text-3xl font-bold text-light">{title}</h1>
+        <h1 className="text-base sm:text-3xl font-bold text-light">{title}</h1>
         <MetaInfo
-          className="text-light text-xl mt-4"
+          className="text-light text-sm sm:text-xl sm:mt-4"
           name={author}
           date={new Date(date)}
         />

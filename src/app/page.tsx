@@ -8,6 +8,7 @@ import Loading from "@/components/loading";
 import PrincipalCard from "@/components/principal-card";
 import RelevantTopics from "@/components/relevant-topics";
 import { Post } from "@/utils/interfaces/posts";
+import { techsRelevants } from "@/utils/mock/topich-relevants";
 
 export default async function Home() {
   const posts = await fetch(
@@ -49,7 +50,9 @@ export default async function Home() {
 
           <LayoutArticle title="Assuntos Relevantes">
             <div className="mx-auto w-24 h-two-pixels rounded-2xl bg-line-blue md:m-0 md:mx-auto lg:mx-auto lg:my-1" />
-            <RelevantTopics />
+            <RelevantTopics
+              techsRelevants={techsRelevants(posts.record.posts)}
+            />
           </LayoutArticle>
         </div>
       </div>

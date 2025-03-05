@@ -7,6 +7,7 @@ import RelevantTopics from "@/components/relevant-topics";
 import "@/styles/details-post.css";
 import Head from "next/head";
 import { Post } from "@/utils/interfaces/posts";
+import { techsRelevants } from "@/utils/mock/topich-relevants";
 
 interface IPostsDetail {
   params: Promise<{ slug: string }>;
@@ -58,7 +59,7 @@ export default async function Posts({ params }: IPostsDetail) {
 
           <LayoutArticle title="Assuntos Relevantes">
             <div className="mx-auto w-24 h-two-pixels rounded-2xl bg-line-blue md:m-0 md:mx-auto lg:mx-auto lg:my-1" />
-            <RelevantTopics />
+            <RelevantTopics techsRelevants={techsRelevants(posts)} />
           </LayoutArticle>
         </div>
         <Bubble />
