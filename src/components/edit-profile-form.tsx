@@ -1,17 +1,12 @@
-import {
-  EditProfileFormData,
-  profileSchema,
-  UserData,
-} from "@/utils/edit-profile-types";
+import { EditProfileFormData, profileSchema } from "@/utils/edit-profile-types";
+import { mockUserData } from "@/utils/mock/user-data";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Button } from "./button";
+import { InputEditProfile } from "./edit-profile-input";
 
 interface ProfileFormProps {
-  initialData: UserData | null;
   isLoading: boolean;
-  formChanged: boolean;
-  setFormChanged: (changed: boolean) => void;
   imageChanged: boolean;
   imageFile: File | null;
   onCancel: () => void;
@@ -19,10 +14,7 @@ interface ProfileFormProps {
 }
 
 export function ProfileForm({
-  initialData,
   isLoading,
-  formChanged,
-  setFormChanged,
   imageChanged,
   imageFile,
   onCancel,
@@ -32,125 +24,62 @@ export function ProfileForm({
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    setError,
-    clearErrors,
-    reset,
     watch,
   } = useForm<EditProfileFormData>({
     resolver: zodResolver(profileSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      linkedin: "",
-      newPassword: "",
-      confirmPassword: "",
-    },
+    defaultValues: mockUserData ?? "",
   });
 
-  // Observar mudanças no formulário
   const formValues = watch();
+  const hasChanges =
+    (Object.keys(mockUserData) as Array<keyof typeof mockUserData>).some(
+      (key) => formValues[key] !== mockUserData[key]
+    ) ||
+    (formValues.newPassword !== "" && formValues.newPassword !== undefined) ||
+    imageChanged; // Verifica se a imagem foi alterada
 
-  // Preencher o formulário quando os dados iniciais estiverem disponíveis
-  useEffect(() => {
-    if (initialData) {
-      reset({
-        firstName: initialData.firstName,
-        lastName: initialData.lastName,
-        email: initialData.email,
-        phone: initialData.phone,
-        linkedin: initialData.linkedin || "",
-        newPassword: "",
-        confirmPassword: "",
-        profileImage: initialData.profileImageUrl,
+  const changedFields = (
+    Object.keys(mockUserData) as Array<keyof typeof mockUserData>
+  ).reduce((acc, key) => {
+    const formValue = formValues[key];
+    const mockValue = mockUserData[key];
+
+    // Verifica se o campo foi alterado e não está vazio
+    if (
+      formValue !== mockValue &&
+      formValue !== "" &&
+      formValue !== null &&
+      formValue !== undefined
+    ) {
+      acc[key] = formValue;
+    }
+    return acc;
+  }, {} as Partial<EditProfileFormData>);
+
+  if (formValues.newPassword !== "" && formValues.newPassword !== undefined) {
+    changedFields.newPassword = formValues.newPassword;
+  }
+
+  if (imageChanged && imageFile) {
+    changedFields.profileImageUrl = imageFile; // Adiciona o arquivo de imagem
+  }
+
+  const handleFormSubmit = () => {
+    if (Object.keys(changedFields).length > 0) {
+      const formData = new FormData();
+
+      Object.entries(changedFields).forEach(([key, value]) => {
+        if (value instanceof File) {
+          formData.append(key, value); // Adiciona a imagem como arquivo
+        } else {
+          formData.append(key, value.toString()); // Adiciona outros campos como texto
+        }
       });
-    }
-  }, [initialData, reset]);
 
-  // Verificar se houve mudanças comparando com os dados originais
-  useEffect(() => {
-    if (initialData) {
-      const hasFormChanges =
-        formValues.firstName !== initialData.firstName ||
-        formValues.lastName !== initialData.lastName ||
-        formValues.email !== initialData.email ||
-        formValues.phone !== initialData.phone ||
-        formValues.linkedin !== initialData.linkedin ||
-        (formValues.newPassword && formValues.newPassword.trim() !== "");
-
-      setFormChanged(hasFormChanges || imageChanged);
-    }
-  }, [formValues, initialData, imageChanged, setFormChanged]);
-
-  const handleFormSubmit = (data: EditProfileFormData) => {
-    // Verificar se houve alguma alteração antes de enviar
-    if (!formChanged) {
-      alert("Nenhuma alteração foi feita.");
+      onSubmit(formData as unknown as EditProfileFormData); // Envia o FormData
+    } else {
       return;
     }
-
-    // Criar um objeto de dados para envio
-    const formData = new FormData();
-    formData.append("firstName", data.firstName);
-    formData.append("lastName", data.lastName);
-    formData.append("email", data.email);
-    formData.append("phone", data.phone);
-
-    // Apenas adiciona linkedin se não for vazio
-    if (data.linkedin && data.linkedin.trim() !== "") {
-      formData.append("linkedin", data.linkedin);
-    }
-
-    // Apenas adiciona password se não for vazio
-    if (data.newPassword && data.newPassword.trim() !== "") {
-      formData.append("password", data.newPassword);
-    }
-
-    // Adiciona a imagem ao FormData se foi alterada
-    if (imageChanged && imageFile) {
-      formData.append("profileImage", imageFile);
-    }
-
-    // Cria um objeto limpo para o log que inclui apenas os campos alterados
-    const dataToLog: Record<string, unknown> = {};
-
-    if (initialData) {
-      if (data.firstName !== initialData.firstName) {
-        dataToLog.firstName = data.firstName;
-      }
-
-      if (data.lastName !== initialData.lastName) {
-        dataToLog.lastName = data.lastName;
-      }
-
-      if (data.email !== initialData.email) {
-        dataToLog.email = data.email;
-      }
-
-      if (data.phone !== initialData.phone) {
-        dataToLog.phone = data.phone;
-      }
-
-      if (data.linkedin !== initialData.linkedin) {
-        dataToLog.linkedin = data.linkedin;
-      }
-
-      if (data.newPassword && data.newPassword.trim() !== "") {
-        dataToLog.password = data.newPassword;
-      }
-
-      if (imageChanged) {
-        dataToLog.profileImage = imageFile
-          ? `(Novo arquivo: ${imageFile.name}, Tamanho: ${(imageFile.size / 1024 / 1024).toFixed(2)}MB)`
-          : "Imagem alterada";
-      }
-    }
-
-    console.log("Campos alterados:", dataToLog);
-
-    onSubmit(data);
   };
 
   return (
@@ -158,120 +87,84 @@ export function ProfileForm({
       onSubmit={handleSubmit(handleFormSubmit)}
       className="w-full max-w-lg mt-6 p-2 md:p-0"
     >
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">*Nome:</label>
-        <input
-          {...register("firstName")}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500"
-          placeholder="Lucas"
-        />
-        {errors.firstName && (
-          <p className="text-red-500 text-sm">{errors.firstName.message}</p>
-        )}
-      </div>
+      <InputEditProfile
+        label="*Nome:"
+        name="firstName"
+        placeholder="Lucas"
+        register={register}
+        error={errors.firstName}
+      />
 
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">*Sobrenome:</label>
-        <input
-          {...register("lastName")}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500"
-          placeholder="Lima"
-        />
-        {errors.lastName && (
-          <p className="text-red-500 text-sm">{errors.lastName.message}</p>
-        )}
-      </div>
+      <InputEditProfile
+        label="*Sobrenome:"
+        name="lastName"
+        placeholder="Lima"
+        register={register}
+        error={errors.lastName}
+      />
 
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">*E-mail:</label>
-        <input
-          disabled
-          {...register("email")}
-          type="email"
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500 cursor-not-allowed"
-          placeholder="lucaslima@gmail.com"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
-      </div>
+      <InputEditProfile
+        label="*E-mail:"
+        name="email"
+        type="email"
+        placeholder="lucaslima@gmail.com"
+        disabled
+        register={register}
+        error={errors.email}
+      />
 
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">
-          *Telefone celular:
-        </label>
-        <input
-          {...register("phone")}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500"
-          placeholder="(84) 93259-5683"
-        />
-        {errors.phone && (
-          <p className="text-red-500 text-sm">{errors.phone.message}</p>
-        )}
-      </div>
+      <InputEditProfile
+        label="*Telefone celular:"
+        name="phone"
+        placeholder="(84) 93259-5683"
+        register={register}
+        error={errors.phone}
+      />
 
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">
-          Linkedin ou portfólio:
-        </label>
-        <input
-          {...register("linkedin")}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500"
-          placeholder="https://www.linkedin.com/in/name/"
-        />
-        {errors.linkedin && (
-          <p className="text-red-500 text-sm">{errors.linkedin.message}</p>
-        )}
-      </div>
+      <InputEditProfile
+        label="Linkedin ou portfólio:"
+        name="linkedin"
+        placeholder="https://www.linkedin.com/in/name/"
+        register={register}
+        error={errors.linkedin}
+      />
 
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">Nova senha:</label>
-        <input
-          type="password"
-          {...register("newPassword")}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500"
-        />
-        {errors.newPassword && (
-          <p className="text-red-500 text-sm">{errors.newPassword.message}</p>
-        )}
-      </div>
+      <InputEditProfile
+        label="Nova senha:"
+        name="newPassword"
+        type="password"
+        register={register}
+        error={errors.newPassword}
+      />
 
-      <div className="mb-4">
-        <label className="block text-gray-700 font-semibold">
-          Confirme a senha:
-        </label>
-        <input
-          type="password"
-          {...register("confirmPassword")}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-blue-500"
-        />
-        {errors.confirmPassword && (
-          <p className="text-red-500 text-sm">
-            {errors.confirmPassword.message}
-          </p>
-        )}
-      </div>
+      <InputEditProfile
+        label="Confirme a senha:"
+        name="confirmPassword"
+        type="password"
+        register={register}
+        error={errors.confirmPassword}
+      />
 
       <div className="flex flex-col gap-2 md:flex-row">
-        <button
+        <Button
           type="submit"
-          className={`w-full py-2 rounded-lg text-lg font-semibold ${
-            formChanged
+          disabled={!hasChanges && !imageChanged}
+          className={
+            hasChanges || imageChanged
               ? "bg-blue-600 text-white hover:bg-blue-700"
               : "bg-gray-400 text-gray-200 cursor-not-allowed"
-          }`}
-          disabled={!formChanged || isLoading}
+          }
         >
           {isLoading ? "Salvando..." : "Salvar"}
-        </button>
+        </Button>
 
-        <button
+        <Button
           type="button"
           onClick={onCancel}
-          className="w-full py-2 rounded-lg text-lg font-semibold transition-all hover:bg-red-600 hover:text-white"
+          className="hover:bg-red-600 hover:text-white"
         >
           Cancelar
-        </button>
+        </Button>
       </div>
     </form>
   );

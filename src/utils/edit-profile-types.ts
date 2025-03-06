@@ -3,23 +3,32 @@ import { z } from "zod";
 
 export const profileSchema = z
   .object({
-    firstName: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-    lastName: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-    email: z.string().email("E-mail inválido"),
+    firstName: z
+      .string()
+      .min(2, "Nome deve ter pelo menos 2 caracteres")
+      .optional(),
+    lastName: z
+      .string()
+      .min(2, "Nome deve ter pelo menos 2 caracteres")
+      .optional(),
+    email: z.string().email("E-mail inválido").optional(),
     phone: z
       .string()
-      .regex(
-        /^\(\d{2}\) \d{5}-\d{4}$/,
-        "Formato inválido. Ex: (99) 99999-9999"
-      ),
-    linkedin: z.string().url("URL inválida").optional().or(z.literal("")),
+      .regex(/^\(\d{2}\) \d{5}-\d{4}$/, "Formato inválido. Ex: (99) 99999-9999")
+      .optional(),
+    linkedin: z
+      .string()
+      .url("URL inválida")
+      .optional()
+      .or(z.literal(""))
+      .optional(),
     newPassword: z
       .string()
       .min(6, "A senha deve ter pelo menos 6 caracteres")
       .optional()
       .or(z.literal("")),
     confirmPassword: z.string().optional(),
-    profileImage: z
+    profileImageUrl: z
       .any()
       .refine(
         (file) =>

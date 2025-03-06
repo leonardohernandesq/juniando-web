@@ -1,115 +1,65 @@
 "use client";
 
 import { ProfileForm } from "@/components/edit-profile-form";
-import ProfileImage from "@/components/edit-profile-image";
+import { ProfileImage } from "@/components/edit-profile-image";
+import Loading from "@/components/loading";
 import { EditProfileFormData } from "@/utils/edit-profile-types";
 import { mockUserData } from "@/utils/mock/user-data";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface OriginalData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  linkedin: string;
-  profileImageUrl: string;
-}
-
 export default function EditProfile() {
   const router = useRouter();
-  const [originalData, setOriginalData] = useState<OriginalData | null>(null);
-  const [image, setImage] = useState<string | null>(null);
+  const [profile, setProfile] = useState<EditProfileFormData | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imageChanged, setImageChanged] = useState<boolean>(false);
-  const [formChanged, setFormChanged] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchUserData = () => {
-      setIsLoading(true);
-
-      setTimeout(() => {
-        setOriginalData({
-          firstName: mockUserData.firstName,
-          lastName: mockUserData.lastName,
-          email: mockUserData.email,
-          phone: mockUserData.phone,
-          linkedin: mockUserData.linkedin,
-          profileImageUrl: mockUserData.profileImageUrl,
-        });
-
-        setImage(mockUserData.profileImageUrl);
-
-        setIsLoading(false);
-      }, 1000);
-    };
-
-    fetchUserData();
+    setTimeout(() => {
+      setProfile(mockUserData);
+    }, 1000);
   }, []);
 
   const handleSaveProfile = async (data: EditProfileFormData) => {
+    setIsLoading(true);
     try {
-      // Simula uma chamada de API com um pequeno delay
-      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setTimeout(() => {
-        setOriginalData({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phone: data.phone,
-          linkedin: data.linkedin || "",
-          profileImageUrl: data.profileImage,
-        });
+      setProfile((prev) =>
+        prev ? { ...data, profileImageUrl: prev.profileImageUrl } : data
+      );
 
-        setFormChanged(false);
-        setImageChanged(false);
-
-        setIsLoading(false);
-        alert("Perfil atualizado com sucesso!");
-      }, 1000);
-    } catch (error) {
-      console.error("Erro ao enviar dados:", error);
-      setIsLoading(false);
+      alert("Perfil atualizado com sucesso!");
+    } catch {
       alert("Erro ao atualizar o perfil. Tente novamente.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleImageUpload = (file: File) => {
-    // Armazena o arquivo para envio posterior
     setImageFile(file);
-
-    // Cria URL para visualização
-    setImage(URL.createObjectURL(file));
-
-    // Marca que a imagem foi alterada
-    setImageChanged(true);
+    setProfile((prev) =>
+      prev ? { ...prev, profileImageUrl: URL.createObjectURL(file) } : null
+    );
   };
 
-  if (isLoading && !originalData) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-        <div className="text-xl font-semibold">Carregando dados...</div>
-      </div>
-    );
+  if (!profile) {
+    return <Loading />;
   }
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gray-50 p-4">
       <ProfileImage
-        image={image}
-        firstName={originalData?.firstName || ""}
-        lastName={originalData?.lastName || ""}
+        image={profile.profileImageUrl}
+        firstName={profile.firstName}
+        lastName={profile.lastName}
         onImageUpload={handleImageUpload}
       />
 
       <ProfileForm
-        initialData={originalData}
         isLoading={isLoading}
-        formChanged={formChanged}
-        setFormChanged={setFormChanged}
-        imageChanged={imageChanged}
+        imageChanged={!!imageFile}
         imageFile={imageFile}
         onCancel={() => router.back()}
         onSubmit={handleSaveProfile}

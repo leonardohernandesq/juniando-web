@@ -1,10 +1,11 @@
 import CameraIcon from "@/components/icons/camera";
 import Image from "next/image";
+import { ChangeEvent } from "react";
 
 interface ProfileImageProps {
   image: string | null;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   onImageUpload: (file: File) => void;
 }
 
@@ -14,7 +15,6 @@ export function ProfileImage({
   lastName,
   onImageUpload,
 }: ProfileImageProps) {
-  // Gerar iniciais para exibição quando não há imagem
   const getInitials = () => {
     if (firstName && lastName) {
       return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
@@ -22,8 +22,8 @@ export function ProfileImage({
     return "Photo";
   };
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleImageChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const file = target.files?.[0];
     if (file) {
       const maxSize = 20 * 1024 * 1024; // 20MB em bytes
 
@@ -31,8 +31,6 @@ export function ProfileImage({
         alert("O arquivo é muito grande. O tamanho máximo permitido é 20MB.");
         return;
       }
-
-      // Verificar tipo de arquivo
       if (!["image/png", "image/jpeg", "image/jpg"].includes(file.type)) {
         alert("O arquivo deve ser PNG, JPG ou JPEG.");
         return;
@@ -73,5 +71,3 @@ export function ProfileImage({
     </div>
   );
 }
-
-export default ProfileImage;
