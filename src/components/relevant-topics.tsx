@@ -1,36 +1,41 @@
+"use client";
+
 import { Fragment } from "react";
 
 import ArrowArticlePosts from "@/components/icons/arrow-article";
 
 import LineGray from "@/components/line-gray";
+import { useRouter } from "next/navigation";
 
-const topicTech: { tech: string }[] = [
-  {
-    tech: "Javascript",
-  },
-  {
-    tech: "ReactJs",
-  },
-  {
-    tech: "VueJs",
-  },
-  {
-    tech: "AngularJs",
-  },
-];
+export interface IRelevanttopicsProps {
+  techsRelevants: {
+    id: number;
+    name: string;
+    quantity: number;
+  }[];
+}
 
-export default function RelevantTopics() {
+export default function RelevantTopics({
+  techsRelevants,
+}: IRelevanttopicsProps) {
+  const router = useRouter();
+
   return (
     <ul className="font-medium">
-      {topicTech.map(({ tech }, index) => {
+      {techsRelevants.map((item, index) => {
         return (
           <Fragment key={index}>
-            <li className="flex items-center py-2 cursor-pointer">
+            <li
+              className="flex items-center py-2 cursor-pointer"
+              onClick={() =>
+                router.push(`/posts?filter=${item.name.toLowerCase()}`)
+              }
+            >
               <ArrowArticlePosts />
-              <span className="pl-2">{tech}</span>
-              <span className="ml-auto">(2)</span>
+              <span className="pl-2">{item.name}</span>
+              <span className="ml-auto">({item.quantity})</span>
             </li>
-            <LineGray />
+            {index !== techsRelevants.length - 1 && <LineGray />}
           </Fragment>
         );
       })}

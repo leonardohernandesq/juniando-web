@@ -1,30 +1,45 @@
 "use client";
 
-import { useCallback } from "react";
+import { HTMLAttributes, useCallback } from "react";
 
 import Image from "next/image";
 
 import MetaInfo from "@/components/meta-info";
+import { Post } from "@/utils/interfaces/posts";
 import { useRouter } from "next/navigation";
 
-interface ICard {
-  date: Date;
-  image: string;
+interface ICardProps {
+  slug: string;
   title: string;
-  author: string;
   description: string;
+  createdAt: Date;
+  author: string;
+  image: string;
+  tags: string[];
 }
 
-const Card = ({ title, description, date, author, image }: ICard) => {
+const Card = ({
+  slug,
+  title,
+  description,
+  createdAt,
+  author,
+  image,
+  tags,
+}: ICardProps) => {
   const router = useRouter();
 
   const openPost = useCallback(() => {
-    router.push("/posts");
-  }, []);
+    router.push(`/posts/${slug}`);
+  }, [slug, router]);
+
+  const removeTagsHTML = (inputString: string) => {
+    return inputString.replace(/<[^>]*>/g, "");
+  };
 
   return (
     <div
-      className="bg-light rounded-b-xl drop-shadow-principal cursor-pointer"
+      className="bg-light rounded-b-xl drop-shadow-principal cursor-pointer h-full"
       onClick={openPost}
     >
       <Image
@@ -34,17 +49,24 @@ const Card = ({ title, description, date, author, image }: ICard) => {
         width={1280}
         height={720}
       />
-      <div className="p-8">
-        <MetaInfo name={author} date={date} />
-        <h1 className="text-dark-100 pt-1 pb-1 text-xl font-semibold line-clamp-2">
+      <div className="p-8 pt-2">
+        <MetaInfo name={author} date={createdAt} />
+        <div className="flex items-center gap-1 mb-1 mt-2">
+          {tags.slice(0, 3).map((item) => (
+            <p
+              className="bg-principal-dark py-1 px-2 text-xxs font-medium text-light rounded-md"
+              key={item}
+            >
+              {item}
+            </p>
+          ))}
+        </div>
+        <h1 className="text-dark-100 pb-1 text-xl font-semibold line-clamp-2">
           {title}
         </h1>
-        <div
-          className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4"
-          dangerouslySetInnerHTML={{
-            __html: description,
-          }}
-        />
+        <p className="text-dark-100 text-xs line-clamp-6 md:line-clamp-4">
+          {removeTagsHTML(description)}
+        </p>
       </div>
     </div>
   );

@@ -7,13 +7,13 @@ const footerMenuCol1 = [
 ];
 
 const footerMenuCol2 = [
-  { href: "#", children: "React" },
-  { href: "#", children: "NextJS" },
-  { href: "#", children: "JavaScript" },
-  { href: "#", children: "Python" },
-  { href: "#", children: "C#" },
-  { href: "#", children: "Java" },
-  { href: "#", children: "NodeJS" },
+  { href: "reactjs", children: "React" },
+  { href: "nextjs", children: "NextJS" },
+  { href: "javascript", children: "JavaScript" },
+  { href: "python", children: "Python" },
+  { href: "c#", children: "C#" },
+  { href: "java", children: "Java" },
+  { href: "nodejs", children: "NodeJS" },
 ];
 
 const footerMenuCol3 = [

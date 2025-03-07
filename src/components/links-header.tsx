@@ -5,11 +5,11 @@ export const LinksHeader = [
   },
   {
     name: "Artigos",
-    link: "/",
+    link: "/posts",
   },
   {
     name: "Vagas",
-    link: "/",
+    link: "/jobs",
   },
   {
     name: "Sobre nós",

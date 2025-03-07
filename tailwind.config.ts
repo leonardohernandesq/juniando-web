@@ -14,7 +14,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-
+        "blue-dark": "#003384",
+        "yellow-title": "#FBC139",
+        "gray-pattern": "#F6F7FC",
         light: "#FFFFFF",
         principal: "#0565FF",
         "principal-secondary": "#004AC0",
@@ -41,8 +43,17 @@ export default {
         "one-pixels": "1px",
         "two-pixels": "2px",
       },
+      maxHeight: {
+        principal_card_max: "440px",
+      },
+      width: {
+        "search-vacances": "300px",
+      },
       maxWidth: {
         page: "1140px",
+      },
+      fontSize: {
+        xxs: "8px",
       },
     },
   },

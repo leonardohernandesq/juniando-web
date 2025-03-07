@@ -1,31 +1,58 @@
-import { Suspense } from "react";
+import React from "react";
 
-import Loading from "@/components/loading";
-import DetailsPosts from "@/components/details-posts";
-import LayoutArticle from "@/components/layout-article";
-import RelevantTopics from "@/components/relevant-topics";
-import Bubble from "@/components/bubble";
-import { postDetail } from "@/utils/mock/post-detail";
+import Card from "@/components/card";
+import { Post } from "@/utils/interfaces/posts";
+import EmptyPage from "@/components/empty";
 
-export default async function Posts() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <main className="w-full pt-9 flex max-w-page mx-auto px-4">
-        <DetailsPosts image="/images/post-react.png" data={postDetail} />
-        <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex w-full">
-          <LayoutArticle title="Juniando">
-            Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no
-            mercado de trabalho, com dicas e anúncios de vagas para você
-            alavangar sua carreira.
-          </LayoutArticle>
-
-          <LayoutArticle title="Assuntos Relevantes">
-            <div className="mx-auto w-24 h-two-pixels rounded-2xl bg-line-blue md:m-0 md:mx-auto lg:mx-auto lg:my-1" />
-            <RelevantTopics />
-          </LayoutArticle>
-        </div>
-        <Bubble />
-      </main>
-    </Suspense>
-  );
+interface IPosts {
+  searchParams: Promise<{ filter: string }>;
 }
+
+const Articles = async ({ searchParams }: IPosts) => {
+  const { filter } = await searchParams;
+
+  const posts = await fetch(
+    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
+    {
+      next: {
+        revalidate: 60, // 1 min
+      },
+    }
+  ).then((res) => {
+    return res.json();
+  });
+
+  const filteredUrl = (postsToFiltered: Post[]) => {
+    const newsPosts = postsToFiltered?.filter((item) =>
+      item.tags.includes(filter)
+    );
+    return newsPosts;
+  };
+
+  const data = filter ? filteredUrl(posts.record.posts) : posts.record.posts;
+
+  return (
+    <section className="max-w-page py-10 m-auto">
+      {data.length ? (
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 items-center justify-between gap-4 m-auto px-4">
+          {data.map((item: Post) => (
+            <Card
+              key={item.id}
+              slug={item.slug}
+              title={item.title}
+              description={item.description}
+              createdAt={new Date(item.createdAt)}
+              author={item.author.name}
+              image={item.image}
+              tags={item.tags}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyPage />
+      )}
+    </section>
+  );
+};
+
+export default Articles;
