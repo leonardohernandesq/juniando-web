@@ -50,7 +50,7 @@ export default async function Posts({ params }: IPostsDetail) {
           className="font-bold text-base mt-2"
           title={postDetails.title}
         />
-        <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex w-full">
+        <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex w-full max-w-articles-detail">
           <LayoutArticle title="Juniando">
             Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no
             mercado de trabalho, com dicas e anúncios de vagas para você
