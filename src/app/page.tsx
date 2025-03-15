@@ -9,20 +9,37 @@ import PrincipalCard from "@/components/principal-card";
 import RelevantTopics from "@/components/relevant-topics";
 import { Post } from "@/utils/interfaces/posts";
 import { techsRelevants } from "@/utils/mock/topich-relevants";
+import { Metadata } from "next";
 
-export default async function Home() {
-  const posts = await fetch(
-    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
-    {
-      next: {
-        revalidate: 60, // 1 min
-      },
-    }
-  ).then((res) => {
+const posts = async () =>
+  await fetch("https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64", {
+    next: {
+      revalidate: 60, // 1 min
+    },
+  }).then((res) => {
     return res.json();
   });
 
-  const principalPost = posts.record.posts.find(
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Juniando",
+    description:
+      "Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
+    openGraph: {
+      title: "Juniando",
+      description:
+        "Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
+      url: "https://juniando.vercel.app/",
+      type: "article",
+      // images: [{ url: postDetails.image }],
+    },
+  };
+}
+
+export default async function Home() {
+  const currentPosts = await posts();
+
+  const principalPost = currentPosts.record.posts.find(
     (item: Post) => item.featured
   ) as Post;
 
@@ -51,7 +68,7 @@ export default async function Home() {
           <LayoutArticle title="Assuntos Relevantes">
             <div className="mx-auto w-24 h-two-pixels rounded-2xl bg-line-blue md:m-0 md:mx-auto lg:mx-auto lg:my-1" />
             <RelevantTopics
-              techsRelevants={techsRelevants(posts.record.posts)}
+              techsRelevants={techsRelevants(currentPosts.record.posts)}
             />
           </LayoutArticle>
         </div>
@@ -59,7 +76,7 @@ export default async function Home() {
 
       <div>
         <HeroSection title="Mais Visualizados">
-          {posts.record.posts.map((item: Post) => (
+          {currentPosts.record.posts.map((item: Post) => (
             <Card
               key={item.id}
               slug={item.slug}
@@ -74,7 +91,7 @@ export default async function Home() {
         </HeroSection>
 
         <HeroSection title="Últimos Posts">
-          {posts.record.posts.map((item: Post) => (
+          {currentPosts.record.posts.map((item: Post) => (
             <Card
               key={item.id}
               slug={item.slug}

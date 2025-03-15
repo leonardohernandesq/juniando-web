@@ -39,12 +39,12 @@ export async function generateMetadata({
   }
 
   return {
-    title: postDetails.title,
+    title: `Juniando: ${postDetails.title}`,
     description: cleanDescription(postDetails.description),
     openGraph: {
-      title: postDetails.title,
+      title: `Juniando: ${postDetails.title}`,
       description: cleanDescription(postDetails.description),
-      url: `https://seusite.com/posts/${slug}`,
+      url: `https://juniando.vercel.app/posts/${slug}`,
       type: "article",
       images: [{ url: postDetails.image }],
     },
