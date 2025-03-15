@@ -7,6 +7,7 @@ import RelevantTopics from "@/components/relevant-topics";
 import "@/styles/details-post.css";
 import { Post } from "@/utils/interfaces/posts";
 import { techsRelevants } from "@/utils/mock/topich-relevants";
+import { cleanDescription } from "@/utils/text-clean-tags-html";
 import { Metadata } from "next";
 
 interface IPostsDetail {
@@ -39,10 +40,10 @@ export async function generateMetadata({
 
   return {
     title: postDetails.title,
-    description: postDetails.description,
+    description: cleanDescription(postDetails.description),
     openGraph: {
       title: postDetails.title,
-      description: postDetails.description,
+      description: cleanDescription(postDetails.description),
       url: `https://seusite.com/posts/${slug}`,
       type: "article",
       images: [{ url: postDetails.image }],
