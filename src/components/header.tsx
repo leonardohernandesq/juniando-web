@@ -20,7 +20,7 @@ const Header = () => {
             src="/logo-dark.svg"
             width={174}
             height={39}
-            className="w-36 md:w-56"
+            className="w-36 md:w-44"
           />
         </button>
         <ul className="items-center gap-14 font-semibold text-dark-100/50 hidden md:flex">
