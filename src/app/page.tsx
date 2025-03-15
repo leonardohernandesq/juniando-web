@@ -43,7 +43,7 @@ export default async function Home() {
     (item: Post) => item.featured
   ) as Post;
 
-  if (posts.length === 0) {
+  if (currentPosts.length === 0) {
     return <Loading />;
   }
 
