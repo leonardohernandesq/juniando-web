@@ -20,22 +20,6 @@ const posts = async () =>
     return res.json();
   });
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Juniando",
-    description:
-      "Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
-    openGraph: {
-      title: "Juniando",
-      description:
-        "Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
-      url: "https://juniando.vercel.app/",
-      type: "article",
-      // images: [{ url: postDetails.image }],
-    },
-  };
-}
-
 export default async function Home() {
   const currentPosts = await posts();
 
