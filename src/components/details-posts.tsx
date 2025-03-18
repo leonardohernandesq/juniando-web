@@ -21,7 +21,13 @@ export default function DetailsPosts({
   const { className, ...props } = rest;
   return (
     <section className="mb-10 w-full" {...props}>
-      <Image src={image} alt="post-image" width={744} height={440} />
+      <Image
+        className="w-full"
+        src={image}
+        alt="post-image"
+        width={744}
+        height={440}
+      />
       <MetaInfo date={createdAt} name={author} className={className} />
       <h1 className="text-4xl mb-4">{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: data }} />
