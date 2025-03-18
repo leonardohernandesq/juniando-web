@@ -22,7 +22,7 @@ export default function Bubble() {
   return (
     <div
       onClick={scrollTop}
-      className={`w-10 h-10 bg-bubble-yellow rounded-full flex items-center justify-center cursor-pointer fixed bottom-20 right-14 z-20 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      className={`w-10 h-10 bg-bubble-yellow rounded-full flex items-center justify-center cursor-pointer fixed bottom-10 right-4 z-20 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
       <ArrowUp />
     </div>
