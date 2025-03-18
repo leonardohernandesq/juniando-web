@@ -40,7 +40,7 @@ export async function generateMetadata({
     openGraph: {
       title: postDetails.title,
       description: cleanDescription(postDetails.description),
-      url: `https://seusite.com/posts/${slug}`,
+      url: `https://juniando.vercel.app/posts/${slug}`,
       type: "article",
       images: [{ url: getImageWithPermission(postDetails.image.key) }],
     },
