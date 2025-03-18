@@ -51,6 +51,7 @@ export default {
       },
       maxWidth: {
         page: "1140px",
+        "articles-detail": "288px",
       },
       fontSize: {
         xxs: "8px",

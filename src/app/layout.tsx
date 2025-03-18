@@ -11,11 +11,21 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 
-export const metadata: Metadata = {
-  title: "Juniando",
-  description:
-    "Ajudamos o Dev Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Juniando",
+    description:
+      "Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
+    openGraph: {
+      title: "Juniando",
+      description:
+        "Ajudamos você Desenvolvedor Jr a conseguir sua primeira vaga no mercado de trabalho, com dicas e anúncios de vagas para você alavangar sua carreira.",
+      url: "https://juniando.vercel.app/",
+      type: "article",
+      // images: [{ url: postDetails.image }],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
