@@ -62,6 +62,7 @@ export default async function Home() {
               author={item.author.name}
               image={getImageWithPermission(item.image.key)}
               tags={item.tags}
+              view={item.views}
             />
           ))}
         </HeroSection>
@@ -77,6 +78,7 @@ export default async function Home() {
               author={item.author.name}
               image={getImageWithPermission(item.image.key)}
               tags={item.tags}
+              view={item.views}
             />
           ))}
         </HeroSection>

@@ -11,7 +11,12 @@ import { getImageWithPermission } from "@/utils/get-image-with-permission";
 
 import "@/styles/details-post.css";
 
-import { fetchPostBySlug, posts } from "@/services/posts";
+import {
+  fetchPostBySlug,
+  increasePostViewCount,
+  posts,
+} from "@/services/posts";
+import { IincreasePostViewCount } from "@/interfaces/posts";
 
 interface IPostsDetail {
   params: Promise<{ slug: string }>;
@@ -22,6 +27,7 @@ export default async function Posts({ params }: IPostsDetail) {
   const currentPosts = await posts();
 
   const post = await fetchPostBySlug(slug);
+  const viewsDetail: IincreasePostViewCount = await increasePostViewCount(slug);
 
   if (!post) {
     return <Loading />;
@@ -41,6 +47,7 @@ export default async function Posts({ params }: IPostsDetail) {
           data={post.description}
           className="font-bold text-base mt-2"
           title={post.title}
+          quantityView={viewsDetail.views}
         />
         <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex w-full max-w-articles-detail">
           <LayoutArticle title="Juniando">

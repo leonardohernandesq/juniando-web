@@ -1,3 +1,14 @@
+export const posts = async () => {
+  const findPosts = fetch(`${process.env.API_URL}/posts`, {
+    next: {
+      revalidate: 60, // 1 min
+    },
+  }).then((res) => {
+    return res.json();
+  });
+  return findPosts;
+};
+
 export const fetchPostBySlug = async (slug: string) => {
   const data = fetch(`${process.env.API_URL}/posts/${slug}`, {
     next: {
@@ -10,13 +21,13 @@ export const fetchPostBySlug = async (slug: string) => {
   return data;
 };
 
-export const posts = async () => {
-  const findPosts = fetch(`${process.env.API_URL}/posts`, {
-    next: {
-      revalidate: 60, // 1 min
-    },
-  }).then((res) => {
+export const increasePostViewCount = async (slug: string) => {
+  const data = fetch(
+    `${process.env.API_URL}/posts/incrementView/${slug}`,
+    {}
+  ).then((res) => {
     return res.json();
   });
-  return findPosts;
+
+  return data;
 };

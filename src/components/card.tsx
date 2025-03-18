@@ -16,6 +16,7 @@ interface ICardProps {
   author: string;
   image: string;
   tags: string[];
+  view?: number;
 }
 
 const Card = ({
@@ -26,6 +27,7 @@ const Card = ({
   author,
   image,
   tags,
+  view,
 }: ICardProps) => {
   const router = useRouter();
 
@@ -50,7 +52,7 @@ const Card = ({
         height={720}
       />
       <div className="p-8 pt-2">
-        <MetaInfo name={author} date={createdAt} />
+        <MetaInfo name={author} date={createdAt} view={view} />
         <div className="flex items-center gap-1 mb-1 mt-2">
           {tags.slice(0, 3).map((item) => (
             <p

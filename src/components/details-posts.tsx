@@ -7,6 +7,7 @@ interface IBlogPosts extends HTMLAttributes<HTMLElement> {
   data: string;
   author: string;
   createdAt: Date;
+  quantityView: number;
   title: string;
 }
 
@@ -15,6 +16,7 @@ export default function DetailsPosts({
   data,
   author,
   createdAt,
+  quantityView,
   title,
   ...rest
 }: IBlogPosts) {
@@ -28,7 +30,12 @@ export default function DetailsPosts({
         width={744}
         height={440}
       />
-      <MetaInfo date={createdAt} name={author} className={className} />
+      <MetaInfo
+        date={createdAt}
+        name={author}
+        className={className}
+        view={quantityView}
+      />
       <h1 className="text-4xl mb-4">{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: data }} />
     </section>
