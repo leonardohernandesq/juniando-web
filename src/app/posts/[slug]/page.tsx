@@ -1,13 +1,17 @@
+import Head from "next/head";
+
 import Bubble from "@/components/bubble";
 import DetailsPosts from "@/components/details-posts";
 import LayoutArticle from "@/components/layout-article";
 import Loading from "@/components/loading";
 import RelevantTopics from "@/components/relevant-topics";
 
-import "@/styles/details-post.css";
-import Head from "next/head";
-import { Post } from "@/utils/interfaces/posts";
 import { techsRelevants } from "@/utils/mock/topich-relevants";
+import { getImageWithPermission } from "@/utils/get-image-with-permission";
+
+import "@/styles/details-post.css";
+
+import { fetchPostBySlug, posts } from "@/services/posts";
 
 interface IPostsDetail {
   params: Promise<{ slug: string }>;
@@ -15,40 +19,28 @@ interface IPostsDetail {
 
 export default async function Posts({ params }: IPostsDetail) {
   const { slug } = await params;
+  const currentPosts = await posts();
 
-  const responsePosts = await fetch(
-    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
-    {
-      next: {
-        revalidate: 60 * 60 * 24, // 24 hours
-      },
-    }
-  ).then((res) => {
-    return res.json();
-  });
+  const post = await fetchPostBySlug(slug);
 
-  const posts = responsePosts.record.posts;
-
-  const postDetails = posts.find((post: Post) => post.slug === slug);
-
-  if (!postDetails) {
+  if (!post) {
     return <Loading />;
   }
 
   return (
     <>
       <Head>
-        <title>{postDetails?.title}</title>
-        <meta name="description" content={postDetails.description} />
+        <title>{post?.title}</title>
+        <meta name="description" content={post.description} />
       </Head>
-      <main className="w-full pt-9 flex max-w-page mx-auto px-4">
+      <main className="w-full pt-9 flex max-w-page mx-auto px-4 gap-4">
         <DetailsPosts
-          author={postDetails.author.name}
-          createdAt={postDetails.createdAt}
-          image={postDetails.image}
-          data={postDetails.description}
+          author={post.author.name}
+          createdAt={post.createdAt}
+          image={getImageWithPermission(post.image.key)}
+          data={post.description}
           className="font-bold text-base mt-2"
-          title={postDetails.title}
+          title={post.title}
         />
         <div className="flex-col gap-y-6 items-center mb-4 md:gap-x-4 md:mb-4 hidden md:flex w-full">
           <LayoutArticle title="Juniando">
@@ -59,7 +51,7 @@ export default async function Posts({ params }: IPostsDetail) {
 
           <LayoutArticle title="Assuntos Relevantes">
             <div className="mx-auto w-24 h-two-pixels rounded-2xl bg-line-blue md:m-0 md:mx-auto lg:mx-auto lg:my-1" />
-            <RelevantTopics techsRelevants={techsRelevants(posts)} />
+            <RelevantTopics techsRelevants={techsRelevants(currentPosts)} />
           </LayoutArticle>
         </div>
         <Bubble />

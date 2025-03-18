@@ -5,7 +5,7 @@ import { HTMLAttributes, useCallback } from "react";
 import Image from "next/image";
 
 import MetaInfo from "@/components/meta-info";
-import { Post } from "@/utils/interfaces/posts";
+
 import { useRouter } from "next/navigation";
 
 interface ICardProps {

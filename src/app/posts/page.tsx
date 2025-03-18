@@ -3,6 +3,8 @@ import React from "react";
 import Card from "@/components/card";
 import { Post } from "@/utils/interfaces/posts";
 import EmptyPage from "@/components/empty";
+import { posts } from "@/services/posts";
+import { getImageWithPermission } from "@/utils/get-image-with-permission";
 
 interface IPosts {
   searchParams: Promise<{ filter: string }>;
@@ -10,17 +12,7 @@ interface IPosts {
 
 const Articles = async ({ searchParams }: IPosts) => {
   const { filter } = await searchParams;
-
-  const posts = await fetch(
-    "https://api.jsonbin.io/v3/b/67be1eaaacd3cb34a8f06a64",
-    {
-      next: {
-        revalidate: 60, // 1 min
-      },
-    }
-  ).then((res) => {
-    return res.json();
-  });
+  const currentPosts = await posts();
 
   const filteredUrl = (postsToFiltered: Post[]) => {
     const newsPosts = postsToFiltered?.filter((item) =>
@@ -29,7 +21,7 @@ const Articles = async ({ searchParams }: IPosts) => {
     return newsPosts;
   };
 
-  const data = filter ? filteredUrl(posts.record.posts) : posts.record.posts;
+  const data = filter ? filteredUrl(currentPosts) : currentPosts;
 
   return (
     <section className="max-w-page py-10 m-auto">
@@ -43,7 +35,7 @@ const Articles = async ({ searchParams }: IPosts) => {
               description={item.description}
               createdAt={new Date(item.createdAt)}
               author={item.author.name}
-              image={item.image}
+              image={getImageWithPermission(item.image.key)}
               tags={item.tags}
             />
           ))}

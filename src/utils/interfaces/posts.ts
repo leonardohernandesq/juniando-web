@@ -2,16 +2,17 @@ export interface Post {
   image: {
     url: string;
     name: string;
+    key: string;
   };
   id: number;
   title: string;
   slug: string;
   likes: number;
   views: number;
-  status: string; // Pode ser um enum se houver valores específicos
+  status: string;
   featured: boolean;
   author: Author;
-  createdAt: Date; // Ou Date se você converter as strings para objetos Date
+  createdAt: Date;
   updatedAt: string | null;
   deletedAt: string | null;
   description: string;
