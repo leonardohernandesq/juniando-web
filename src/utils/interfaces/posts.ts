@@ -1,4 +1,8 @@
 export interface Post {
+  image: {
+    url: string;
+    name: string;
+  };
   id: number;
   title: string;
   slug: string;
@@ -10,7 +14,6 @@ export interface Post {
   createdAt: Date; // Ou Date se você converter as strings para objetos Date
   updatedAt: string | null;
   deletedAt: string | null;
-  image: string;
   description: string;
   tags: string[];
 }
