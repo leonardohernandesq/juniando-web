@@ -22,10 +22,11 @@ export const fetchPostBySlug = async (slug: string) => {
 };
 
 export const increasePostViewCount = async (slug: string) => {
-  const data = fetch(
-    `${process.env.API_URL}/posts/incrementView/${slug}`,
-    {}
-  ).then((res) => {
+  const url =
+    process.env.NODE_ENV === "development"
+      ? `/posts/postDetailView/${slug}`
+      : `/posts/incrementView/${slug}`;
+  const data = fetch(`${process.env.API_URL}${url}`, {}).then((res) => {
     return res.json();
   });
 
