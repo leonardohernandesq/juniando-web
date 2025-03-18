@@ -17,9 +17,34 @@ import {
   posts,
 } from "@/services/posts";
 import { IincreasePostViewCount } from "@/interfaces/posts";
+import { Metadata } from "next";
+import { cleanDescription } from "@/utils/text-clean-tags-html";
 
 interface IPostsDetail {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: IPostsDetail): Promise<Metadata> {
+  const slug = (await params).slug;
+  const postDetails = await fetchPostBySlug(slug);
+
+  if (!postDetails) {
+    return { title: "Post não encontrado" };
+  }
+
+  return {
+    title: postDetails.title,
+    description: cleanDescription(postDetails.description),
+    openGraph: {
+      title: postDetails.title,
+      description: cleanDescription(postDetails.description),
+      url: `https://seusite.com/posts/${slug}`,
+      type: "article",
+      images: [{ url: getImageWithPermission(postDetails.image.key) }],
+    },
+  };
 }
 
 export default async function Posts({ params }: IPostsDetail) {

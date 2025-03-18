@@ -1,6 +1,6 @@
 "use client";
 
-import { HTMLAttributes, useCallback } from "react";
+import { useCallback } from "react";
 
 import Image from "next/image";
 

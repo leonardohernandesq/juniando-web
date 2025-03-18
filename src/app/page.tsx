@@ -10,7 +10,6 @@ import { posts } from "@/services/posts";
 import { getImageWithPermission } from "@/utils/get-image-with-permission";
 import { Post } from "@/utils/interfaces/posts";
 import { techsRelevants } from "@/utils/mock/topich-relevants";
-import { Metadata } from "next";
 
 export default async function Home() {
   const currentPosts = await posts();
