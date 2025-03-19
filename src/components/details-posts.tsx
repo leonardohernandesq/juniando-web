@@ -36,7 +36,7 @@ export default function DetailsPosts({
         className={className}
         view={quantityView}
       />
-      <h1 className="text-4xl mb-4">{title}</h1>
+      <h1 className="text-xl md:text-3xl mb-2">{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: data }} />
     </section>
   );

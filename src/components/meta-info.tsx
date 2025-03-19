@@ -22,7 +22,7 @@ const MetaInfo = ({ name, date, view, ...rest }: IMetaInfo) => {
       <span>{name}</span>
       <span className="bg-principal w-1 h-1 rounded-full" />
       <span>{formatDate(date)}</span>
-      {view && (
+      {!!view && (
         <div className="flex items-center gap-1">
           <span className="bg-principal w-1 h-1 rounded-full mr-1" />
           <span>{view}</span>

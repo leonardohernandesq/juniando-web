@@ -16,8 +16,8 @@ export const techsRelevants = (posts: Post[]) => {
     },
     {
       id: 3,
-      name: "VueJS",
-      quantity: posts.filter((item: Post) => item.tags.includes("vuejs"))
+      name: "NodeJS",
+      quantity: posts.filter((item: Post) => item.tags.includes("nodejs"))
         .length,
     },
     {
