@@ -35,7 +35,7 @@ const Articles = async ({ searchParams }: IPosts) => {
               description={item.description}
               createdAt={new Date(item.createdAt)}
               author={item.author.name}
-              image={getImageWithPermission(item.image.key)}
+              image={item.image.url}
               tags={item.tags}
               view={item.views}
             />

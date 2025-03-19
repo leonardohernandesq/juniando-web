@@ -60,7 +60,7 @@ export default async function Home() {
               description={item.description}
               createdAt={item.createdAt}
               author={item.author.name}
-              image={getImageWithPermission(item.image.key)}
+              image={item.image.url}
               tags={item.tags}
               view={item.views}
             />
@@ -76,7 +76,7 @@ export default async function Home() {
               description={item.description}
               createdAt={item.createdAt}
               author={item.author.name}
-              image={getImageWithPermission(item.image.key)}
+              image={item.image.url}
               tags={item.tags}
               view={item.views}
             />
