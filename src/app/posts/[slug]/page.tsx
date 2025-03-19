@@ -49,7 +49,7 @@ export async function generateMetadata({
 
 export default async function Posts({ params }: IPostsDetail) {
   const { slug } = await params;
-  const currentPosts = await posts();
+  const currentPosts = await posts({});
 
   const post = await fetchPostBySlug(slug);
   const viewsDetail: IincreasePostViewCount = await increasePostViewCount(slug);

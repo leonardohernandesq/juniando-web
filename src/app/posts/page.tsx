@@ -12,7 +12,7 @@ interface IPosts {
 
 const Articles = async ({ searchParams }: IPosts) => {
   const { filter } = await searchParams;
-  const currentPosts = await posts();
+  const currentPosts = await posts({});
 
   const filteredUrl = (postsToFiltered: Post[]) => {
     const newsPosts = postsToFiltered?.filter((item) =>

@@ -5,20 +5,21 @@ import LayoutArticle from "@/components/layout-article";
 import Loading from "@/components/loading";
 import PrincipalCard from "@/components/principal-card";
 import RelevantTopics from "@/components/relevant-topics";
-import { posts } from "@/services/posts";
+import { posts, postsMostViews } from "@/services/posts";
 
 import { getImageWithPermission } from "@/utils/get-image-with-permission";
 import { Post } from "@/utils/interfaces/posts";
 import { techsRelevants } from "@/utils/mock/topich-relevants";
 
 export default async function Home() {
-  const currentPosts = await posts();
+  const currentPosts = await posts({ limit: 6 });
+  const postsWithMostViews = await postsMostViews();
 
   const principalPost = currentPosts.find(
     (item: Post) => item.featured
   ) as Post;
 
-  if (currentPosts.length === 0) {
+  if (currentPosts.length === 0 || postsWithMostViews.length === 0) {
     return <Loading />;
   }
 
@@ -51,7 +52,7 @@ export default async function Home() {
 
       <div>
         <HeroSection title="Mais Visualizados">
-          {currentPosts.map((item: Post) => (
+          {postsWithMostViews.map((item: Post) => (
             <Card
               key={item.id}
               slug={item.slug}
