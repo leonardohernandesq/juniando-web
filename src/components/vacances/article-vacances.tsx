@@ -44,7 +44,7 @@ export default function ArticleVacances({ jobs }: { jobs: IJobs[] }) {
             </div>
             <DialogVacances
               openDialog={openDialog}
-              content={job.description}
+              job={job}
               onClose={() => setOpenDialog(!openDialog)}
             />
           </article>
